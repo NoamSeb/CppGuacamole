@@ -19,6 +19,7 @@ int main()
         }
         window.clear();
         sf::CircleShape circle; // Déclaration de "circle" (sans affectation)
+        circle.setFillColor(sf::Color::Red);
         circle.setRadius(100.0f); // Appel de méthode qui travaille sur "circle"
         // Whatever I want to draw goes here
         window.display();
