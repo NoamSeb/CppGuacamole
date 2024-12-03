@@ -1,8 +1,9 @@
 // GuAcAmOlE.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include <SFML/Graphics.hpp>
-#include <iostream>
+//#include <SFML/Graphics.hpp>
+//#include <iostream>
+#include "Player.h"
 
 int main()
 {
@@ -20,7 +21,7 @@ int main()
         window.clear();
         sf::CircleShape circle; // Déclaration de "circle" (sans affectation)
         circle.setFillColor(sf::Color::Red);
-        circle.setRadius(100.0f); // Appel de méthode qui travaille sur "circle"
+        circle.setRadius(300.0f); // Appel de méthode qui travaille sur "circle"
         // Whatever I want to draw goes here
         window.display();
     }
