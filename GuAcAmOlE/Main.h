@@ -1,9 +1,10 @@
 #pragma once
-#include <vector>
-#include "Object.h"
+#include <list>
+
+class Object;
 
 namespace Main
 {
-	static std::vector<Object> ObjectToDraw;
+	extern std::list<Object*> ObjectToDraw;
 };
 

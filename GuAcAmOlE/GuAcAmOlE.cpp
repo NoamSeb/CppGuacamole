@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include "Main.h"
 #include "Object.h"
 
@@ -17,8 +19,8 @@ int main()
             {
 				if (event.key.code == sf::Keyboard::Key::Space)
 				{
-					Object object;
-                    object.Create(Object::ShapeType::Circle);
+					Object* object = new Object();
+                    object->Create(Object::ShapeType::Circle);
 				}
 
             }
@@ -26,7 +28,7 @@ int main()
         window.clear();
         for (auto object_to_draw : Main::ObjectToDraw)
         {
-			window.draw(*object_to_draw.shape);
+			window.draw(*(object_to_draw->shape));
         }
         window.display();
     }

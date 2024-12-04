@@ -15,5 +15,6 @@ public:
 
 	void Create(ShapeType shapeType);
 	void Destroy(sf::RenderWindow window);
+	~Object();
 };
 
