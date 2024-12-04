@@ -23,6 +23,11 @@ int main()
                     object->Create(Object::ShapeType::Circle);
 				}
 
+                if (event.key.code == sf::Keyboard::Key::B)
+                {
+                    if (Main::ObjectToDraw.size() > 0)
+                    Main::ObjectToDraw.front()->Destroy();
+                }
             }
         }
         window.clear();

@@ -31,11 +31,16 @@ void Object::Create(ShapeType shapeType)
 
 	Main::ObjectToDraw.push_back(this);
 }
-void Object::Destroy(sf::RenderWindow window)
+void Object::Destroy()
 {
 	delete this;
 }
+
 Object::~Object()
 {
+	std::list<Object*>::iterator it = std::find(Main::ObjectToDraw.begin(), Main::ObjectToDraw.end(), this);
+	if (it != Main::ObjectToDraw.end()) {
+		Main::ObjectToDraw.erase(it);
+	}
 	delete shape;
 }
