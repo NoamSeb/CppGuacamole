@@ -1,9 +1,6 @@
 #include <iostream>
+#include "SFML/Main.hpp"
 #include "wtypes.h"
-
-using namespace std;
-using namespace sf;
-
 #include "Main.h"
 #include "Object.h"
 
