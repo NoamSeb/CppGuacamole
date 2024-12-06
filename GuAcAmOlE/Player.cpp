@@ -46,6 +46,8 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed)
 
 void Player::Tick(float DeltaTime)
 {
+	Object::Tick(DeltaTime);
+
 	sf::Vector2f movement;
 
 	if (up)
