@@ -2,10 +2,11 @@
 
 #include "Main.h"
 #include "Object.h"
+#include "Ennemy.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Avocado run");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "Avocado rush");
     // Initialise everything below
     // Game loop
     while (window.isOpen()) {
@@ -19,18 +20,26 @@ int main()
             {
 				if (event.key.code == sf::Keyboard::Key::Space)
 				{
-					Object* object = new Object();
-                    object->Create(Object::ShapeType::Circle);
+                    Ennemy* ennemies[3] = { nullptr };
+                    for (int i = 0; i < 3; ++i) {
+                        Ennemy* ennemy = new Ennemy();
+                        ennemy->InitEnnemy();
+                        ennemies[i] = ennemy;
+                    }
+					std::cout << "Ennemies created" << std::endl;
 				}
 
                 if (event.key.code == sf::Keyboard::Key::B)
                 {
                     if (Main::ObjectToDraw.size() > 0)
-                    Main::ObjectToDraw.front()->Destroy();
+                    {
+                        Main::ObjectToDraw.front()->Destroy();
+                    }
                 }
             }
         }
         window.clear();
+		
         for (auto object_to_draw : Main::ObjectToDraw)
         {
 			window.draw(*(object_to_draw->shape));

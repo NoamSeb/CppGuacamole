@@ -133,11 +133,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Ennemy.cpp" />
     <ClCompile Include="GuAcAmOlE.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Object.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Ennemy.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="Object.h" />
   </ItemGroup>
