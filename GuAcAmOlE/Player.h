@@ -3,6 +3,7 @@
 #include <iostream>
 #include "wtypes.h"
 #include "MathUtils.h"
+#include "MathUtils.cpp"
 
 class Player;
 

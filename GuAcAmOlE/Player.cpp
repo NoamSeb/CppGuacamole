@@ -69,22 +69,22 @@ public:
 
 		if (up)
 		{
-			movement.y -= 0.5f;
-			
+			movement.y -= 0.1f;
 
 		}if (down)
 		{
-			movement.y += 0.5f;
+			movement.y += 0.1f;
 		}
 		if (left)
 		{
-			movement.x -= 0.5f;
+			movement.x -= 0.1f;
 		}if (right)
 		{
-			movement.x += 0.5f;
+			movement.x += 0.1f;
 		}
 
 		rect.move(movement);
+		
 	}
 
 	void drawTo(sf::RenderWindow &window) 
@@ -111,17 +111,4 @@ private:
 //{
 //	float x;
 //	float y;
-//};
-
-
-//float GetMagnitude(sf::Vector2f v)
-//{
-//	return sqrt(v.x * v.x + v.y * v.y);
-//};
-//
-//sf::Vector2f Normalize(sf::Vector2f v)
-//{
-//	if (v.x == 0.f && v.y == 0.f)
-//		return { 0.f, 0.f };
-//	return v / GetMagnitude(v);
 //};
