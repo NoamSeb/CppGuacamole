@@ -1,9 +1,5 @@
 #include <iostream>
-#include "wtypes.h"
-
-using namespace std;
-using namespace sf;
-
+#include "SFML/Main.hpp"
 #include "Main.h"
 #include "Object.h"
 
@@ -11,9 +7,12 @@ int main()
 {
   //sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "AvocadoRush", sf::Style::Fullscreen);
     sf::RenderWindow window(sf::VideoMode(800, 600), "AvocadoRush");
-    // Initialise everything below
-    // Game loop
+    sf::Clock clock;
+    
     while (window.isOpen()) {
+        float deltaTime = clock.getElapsedTime().asSeconds();
+        clock.restart();
+
         sf::Event event;
         while (window.pollEvent(event)) {
             // Process any input event here
@@ -24,22 +23,34 @@ int main()
             {
 				if (event.key.code == sf::Keyboard::Key::Space)
 				{
-					Object* object = new Object();
-                    object->Create(Object::ShapeType::Circle);
+					Object* object = new Object(Object::ShapeType::Circle, true);
 				}
 
                 if (event.key.code == sf::Keyboard::Key::B)
                 {
-                    if (Main::ObjectToDraw.size() > 0)
-                    Main::ObjectToDraw.front()->Destroy();
+                    if (Main::Objects.size() > 0)
+                    Main::Objects.front()->Destroy();
                 }
             }
         }
-        window.clear();
-        for (auto object_to_draw : Main::ObjectToDraw)
-        {
-			window.draw(*(object_to_draw->shape));
+
+        // LOGIC
+
+        for (auto objectToTick : Main::Objects) {
+            if (objectToTick->bTick) {
+                objectToTick->Tick(deltaTime);
+            }
         }
+
+        window.clear();
+        
+        // RENDER
+
+        for (auto objectToDraw : Main::Objects)
+        {
+			window.draw(*(objectToDraw->shape));
+        }
+
         window.display();
     }
 }

@@ -4,6 +4,7 @@
 class Object
 {
 public:
+	bool bTick = false;
 	sf::Shape* shape;
 
 	enum ShapeType
@@ -13,8 +14,9 @@ public:
 		Triangle
 	};
 
-	void Create(ShapeType shapeType);
+	virtual void Tick(float DeltaTime);
 	void Destroy();
+	Object(ShapeType shapeType, bool willTick);
 	~Object();
 };
 

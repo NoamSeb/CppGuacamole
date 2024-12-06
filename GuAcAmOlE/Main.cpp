@@ -1,3 +1,3 @@
 #include "Main.h"
 
-std::list<Object*> Main::ObjectToDraw;
+std::list<Object*> Main::Objects;
