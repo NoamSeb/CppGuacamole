@@ -2,12 +2,14 @@
 #include "SFML/Main.hpp"
 #include "Main.h"
 #include "Object.h"
+#include "Player.h"
 
 int main()
 {
   //sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "AvocadoRush", sf::Style::Fullscreen);
     sf::RenderWindow window(sf::VideoMode(800, 600), "AvocadoRush");
     sf::Clock clock;
+    Player player(100.0f, 100.0f);
     
     while (window.isOpen()) {
         float deltaTime = clock.getElapsedTime().asSeconds();
@@ -32,6 +34,15 @@ int main()
                     Main::Objects.front()->Destroy();
                 }
             }
+            if (event.type == sf::Event::KeyPressed)
+            {
+                player.processEvents(event.key.code, true);
+            }
+            if (event.type == sf::Event::KeyReleased)
+            {
+                player.processEvents(event.key.code, false);
+            }
+
         }
 
         // LOGIC
@@ -43,6 +54,7 @@ int main()
         }
 
         window.clear();
+;
         
         // RENDER
 

@@ -1,114 +1,74 @@
 #include "Player.h"
 
+//Player::Player(float x, float y) :Object(Circle, true)
+//{
+//	//(*shape).setSize(sf::Vector2f(x, y));
+//
+//	up = false;
+//	down = false;
+//	left = false;
+//	right = false;
+//}
 
-class Player
+
+
+
+void Player::processEvents(sf::Keyboard::Key key, bool checkPressed)
 {
-public:
-	Player(float x, float y)
+	if (checkPressed)
 	{
-		rect.setSize(sf::Vector2f(x, y));
+		if (key == sf::Keyboard::Up)
+		{
+			up = true;
+		}
+		if (key == sf::Keyboard::Down)
+		{
+			down = true;
+		}
+		if (key == sf::Keyboard::Left)
+		{
+			left = true;
+		}
+		if (key == sf::Keyboard::Right)
+		{
+			right = true;
+		}
+	}
 
+	if (!checkPressed)
+	{
 		up = false;
 		down = false;
 		left = false;
 		right = false;
-	};
+	}
+}
 
+void Player::Tick(float DeltaTime)
+{
+	sf::Vector2f movement;
 
-
-	//~Player();
-
-	//void MouvementDroite() {
-	//	.move(5.0f, 0.0f);
-	//}
-	//void MouvementGauche() {
-	//	.move(-5.0f, 0.0f);
-	//}
-	//
-	//void MouvementBas() {
-	//	.move(0.0f, -5.0f);
-	//}
-
-
-
-
-	void processEvents(sf::Keyboard::Key key, bool checkPressed) 
+	if (up)
 	{
-		if (checkPressed)
-		{
-			if (key == sf::Keyboard::Up) 
-			{
-				up = true;
-			}
-			if (key == sf::Keyboard::Down)
-			{
-				down = true;
-			}
-			if (key == sf::Keyboard::Left)
-			{
-				left = true;
-			}
-			if (key == sf::Keyboard::Right)
-			{
-				right = true;
-			}
-		}
+		movement.y -= 0.1f;
 
-		if (!checkPressed)
-		{
-			up = false;
-			down = false;
-			left = false;
-			right = false;
-		}
+	}if (down)
+	{
+		movement.y += 0.1f;
+	}
+	if (left)
+	{
+		movement.x -= 0.1f;
+	}if (right)
+	{
+		movement.x += 0.1f;
 	}
 
-	void update()
-	{
-		sf::Vector2f movement;
+	(*shape).move(movement);
 
-		if (up)
-		{
-			movement.y -= 0.1f;
+}
 
-		}if (down)
-		{
-			movement.y += 0.1f;
-		}
-		if (left)
-		{
-			movement.x -= 0.1f;
-		}if (right)
-		{
-			movement.x += 0.1f;
-		}
-
-		rect.move(movement);
-		
-	}
-
-	void drawTo(sf::RenderWindow &window) 
-	{
-		window.draw(rect);
-	}
-
-private:
-
-	sf::RectangleShape rect;
-
-	bool up;
-	bool down;
-	bool left;
-	bool right;
-};
-
-
-//Player::~Player()
-//{
-//}
-
-//struct Vector2f
-//{
-//	float x;
-//	float y;
-//};
+void Player::drawTo(sf::RenderWindow& window)
+{
+	window.draw((*shape));
+}
