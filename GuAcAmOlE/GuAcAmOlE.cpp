@@ -11,6 +11,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600), "AvocadoRush");
     sf::Clock clock;
     Player player(100.0f, 100.0f);
+	Main::EnnemySpawner();
     
     while (window.isOpen()) {
         float deltaTime = clock.getElapsedTime().asSeconds();
@@ -27,13 +28,6 @@ int main()
 				if (event.key.code == sf::Keyboard::Key::Space)
 				{
 					Object* object = new Object(Object::ShapeType::Circle, true);
-                    Ennemy* ennemies[3] = { nullptr };
-                    for (int i = 0; i < 3; ++i) {
-                        Ennemy* ennemy = new Ennemy();
-                        ennemy->InitEnnemy();
-                        ennemies[i] = ennemy;
-                    }
-					std::cout << "Ennemies created" << std::endl;
 				}
 
                 if (event.key.code == sf::Keyboard::Key::B)

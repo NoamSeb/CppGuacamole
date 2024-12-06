@@ -3,11 +3,7 @@
 #include <iostream>
 class Object;
 
-void Ennemy::InitEnnemy()
+void Ennemy::Tick(float DeltaTime)
 {
-	std::cout << "Init ennemies" << std::endl;
-	Object* ennemy = new Object;
-	ennemy->Create(Circle);
-	dynamic_cast<sf::CircleShape*>(ennemy->shape)->setFillColor(sf::Color::Red);
-	std::cout << "Ennemy created" << std::endl;
+	std::cout << "Ennemy ticked" << std::endl;
 }

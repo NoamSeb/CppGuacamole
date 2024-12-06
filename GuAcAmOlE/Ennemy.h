@@ -3,8 +3,6 @@
 
 static class Ennemy : public Object
 {
-public:
-	static
-	void InitEnnemy();
+	virtual void Tick(float DeltaTime) override;
 };
 

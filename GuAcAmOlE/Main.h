@@ -6,5 +6,6 @@ class Object;
 namespace Main
 {
 	extern std::list<Object*> Objects;
+	void EnnemySpawner();
 };
 
