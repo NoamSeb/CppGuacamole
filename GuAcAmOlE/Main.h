@@ -5,6 +5,6 @@ class Object;
 
 namespace Main
 {
-	extern std::list<Object*> ObjectToDraw;
+	extern std::list<Object*> Objects;
 };
 

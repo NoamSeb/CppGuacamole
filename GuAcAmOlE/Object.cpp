@@ -2,8 +2,10 @@
 #include <iostream>
 #include "Main.h"
 
-void Object::Create(ShapeType shapeType)
-{
+
+Object::Object(ShapeType shapeType, bool willTick) {
+	bTick = willTick;
+
 	switch (shapeType)
 	{
 	case Circle:
@@ -26,21 +28,31 @@ void Object::Create(ShapeType shapeType)
 		break;
 	default:
 		std::cout << "Invalid shape type" << std::endl;
+		Destroy();
 		break;
 	}
 
-	Main::ObjectToDraw.push_back(this);
-}
-void Object::Destroy()
-{
-	delete this;
+	Main::Objects.push_back(this);
 }
 
 Object::~Object()
 {
-	std::list<Object*>::iterator it = std::find(Main::ObjectToDraw.begin(), Main::ObjectToDraw.end(), this);
-	if (it != Main::ObjectToDraw.end()) {
-		Main::ObjectToDraw.erase(it);
+	std::list<Object*>::iterator it = std::find(Main::Objects.begin(), Main::Objects.end(), this);
+	if (it != Main::Objects.end()) {
+		Main::Objects.erase(it);
 	}
 	delete shape;
+}
+
+void Object::Tick(float DeltaTime)
+{
+	if (!bTick) {
+		return;
+	}
+	std::cout << DeltaTime << std::endl;
+}
+
+void Object::Destroy()
+{
+	delete this;
 }
