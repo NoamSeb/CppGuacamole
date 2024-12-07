@@ -16,3 +16,9 @@ void Main::EnnemySpawner()
     }
     std::cout << "Ennemies created" << std::endl;
 }
+
+void Main::DeleteAllObjects() {
+    for (auto it = Main::Objects.begin(); it != Main::Objects.end(); ) {
+        it = Main::Objects.erase(it);
+    }
+}

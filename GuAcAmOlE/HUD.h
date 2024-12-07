@@ -13,6 +13,10 @@ class HUD
 		}
 
 		//Fonctions publiques
+
+		void FinishGame();
+
+
 		void LoadFont();
 		sf::Text CreateText(std::string text, sf::Color color = sf::Color::White);
 		sf::Text CreateTimerText(float timeInSeconds);

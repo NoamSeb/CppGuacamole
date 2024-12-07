@@ -1,9 +1,18 @@
 #include "HUD.h"
+#include "Object.h"
+#include "Main.h"
 #include <iostream>
 
 //initialisation du singleton
 HUD* HUD::instance = nullptr;
 
+//GameLoop
+void HUD::FinishGame() {
+    Main::DeleteAllObjects();
+}
+
+
+//Texts
 void HUD::LoadFont() {
     arial.loadFromFile("..\\external\\Fonts\\Arial.ttf");
 }
@@ -19,6 +28,7 @@ sf::Text HUD::CreateText(std::string text, sf::Color color) {
     return myText;
 }
 
+//Timer
 sf::Text HUD::CreateTimerText(float timeInSeconds) {
 
     sf::Text myTimer;
@@ -51,20 +61,3 @@ std::string HUD::FormatMyTimer(float timeInSeconds) {
         return formattedString;
 
 }
-
-//void SetText(sf::Text& myText, std::string text) {
-//
-//    sf::Font myFont;
-//    myFont.loadFromFile("..\\external\\Fonts\\Arial.ttf");
-//    std::cout << "jsuis fzheghgzhfghazgfhzgh";
-//
-//    myText.setFont(myFont);
-//
-//    std::cout << "jsuis loooooooooooooooooooooo";
-//    myText.setString(text);
-//    //myText.setScale(400,1.5f);
-//    myText.setPosition(40.0f, 5.0f);
-//
-//    std::cout << "helllllllllllp";
-//}
-

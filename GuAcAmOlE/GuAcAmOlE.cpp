@@ -12,7 +12,7 @@ int main()
     sf::RenderWindow window(sf::VideoMode(800, 600), "AvocadoRush");
     sf::Clock clock;
 
-    //Get l'insatnce de HUD
+    //Get l'instance de HUD
     HUD* _HUD = HUD::getInstance();
     _HUD->LoadFont(); // pr tous les texts
 
@@ -24,12 +24,12 @@ int main()
     float timeElapsed=0;
 
     //Restart
-    //bool go = true;
+    bool gameOver = true;
 
     
     while (window.isOpen()) 
     {
-        //if (go != false) {
+        //if (gameOver != false) {
         float deltaTime = clock.getElapsedTime().asSeconds();
         timeElapsed += clock.getElapsedTime().asSeconds();
         clock.restart();
@@ -44,14 +44,16 @@ int main()
                 window.close();
             }
 
-            //if (go == false) {
+            //if (gameOver == false) {
                 if (event.type == sf::Event::KeyPressed)
                 {
 
                     if (event.key.code == sf::Keyboard::Key::K)
                     {
-                        //go = true;
+                        //gameOver = true;
                         std::cout << "Recommence" << std::endl;
+                        _HUD->FinishGame();
+                        gameOver = false;
                     }
                 }
             //}
@@ -62,7 +64,7 @@ int main()
                     if (event.key.code == sf::Keyboard::Key::Space)
                     {
 
-                        //go = false;
+                        //gameOver = false;
                         Object* object = new Object(Object::ShapeType::Circle, true);
                     }
 
