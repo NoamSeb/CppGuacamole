@@ -4,7 +4,7 @@
 #include "wtypes.h"
 #include "Object.h"
 
-class Player : Object
+class Player : public Object
 {
 public:
 	Player(float x, float y) : Object(Circle, true) {

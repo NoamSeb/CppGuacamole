@@ -3,6 +3,7 @@
 #include "Main.h"
 #include "Object.h"
 #include "Player.h"
+#include "Block.h"
 
 int main()
 {
@@ -44,6 +45,8 @@ int main()
             }
 
         }
+
+        Main::spawnObt(deltaTime);
 
         // LOGIC
 
