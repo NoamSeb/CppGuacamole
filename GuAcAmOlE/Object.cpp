@@ -55,3 +55,6 @@ void Object::Destroy()
 {
 	delete this;
 }
+
+void Object::Init() {
+}

@@ -14,12 +14,13 @@ class HUD
 
 		//Fonctions publiques
 
-		void FinishGame();
+		void InitGame();
 
 
 		void LoadFont();
 		sf::Text CreateText(std::string text, sf::Color color = sf::Color::White);
 		sf::Text CreateTimerText(float timeInSeconds);
+		//HUD::InitTimer(float timeInSeconds);
 
 	private :
 		//pointeur vers le singleton

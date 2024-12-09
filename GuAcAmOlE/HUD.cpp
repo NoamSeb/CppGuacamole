@@ -1,14 +1,20 @@
 #include "HUD.h"
 #include "Object.h"
 #include "Main.h"
+#include "Player.h"
 #include <iostream>
+
 
 //initialisation du singleton
 HUD* HUD::instance = nullptr;
 
+class Player;
+
 //GameLoop
-void HUD::FinishGame() {
-    Main::DeleteAllObjects();
+void HUD::InitGame() {
+    //Main::DeleteAllEnemies();
+    Main::InitAllObjects();
+    //InitPlayer();
 }
 
 
@@ -61,3 +67,7 @@ std::string HUD::FormatMyTimer(float timeInSeconds) {
         return formattedString;
 
 }
+
+//void HUD::InitTimer(float timeInSeconds) {
+//    timeInSeconds = 0;
+//}

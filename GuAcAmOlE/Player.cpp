@@ -74,3 +74,7 @@ void Player::drawTo(sf::RenderWindow& window)
 {
 	window.draw((*shape));
 }
+
+void Player::Init() {
+	shape->setPosition(posInit);
+}

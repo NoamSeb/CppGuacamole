@@ -16,25 +16,22 @@ int main()
     HUD* _HUD = HUD::getInstance();
     _HUD->LoadFont(); // pr tous les texts
 
-    Player player(100.0f, 100.0f);
+    Player player(300.0f, 250.0f);
+    //std::cout << player.posInit.x << std::endl;
 	Main::EnnemySpawner();
-
 
     //Timer
     float timeElapsed=0;
 
     //Restart
-    bool gameOver = true;
+    //bool gameOver = true;
 
     
     while (window.isOpen()) 
     {
-        //if (gameOver != false) {
         float deltaTime = clock.getElapsedTime().asSeconds();
-        timeElapsed += clock.getElapsedTime().asSeconds();
+        timeElapsed += deltaTime;
         clock.restart();
-        //}
-
 
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -43,28 +40,10 @@ int main()
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
-
-            //if (gameOver == false) {
-                if (event.type == sf::Event::KeyPressed)
-                {
-
-                    if (event.key.code == sf::Keyboard::Key::K)
-                    {
-                        //gameOver = true;
-                        std::cout << "Recommence" << std::endl;
-                        _HUD->FinishGame();
-                        gameOver = false;
-                    }
-                }
-            //}
-            //else {
-
                 if (event.type == sf::Event::KeyPressed)
                 {
                     if (event.key.code == sf::Keyboard::Key::Space)
                     {
-
-                        //gameOver = false;
                         Object* object = new Object(Object::ShapeType::Circle, true);
                     }
 
@@ -72,6 +51,13 @@ int main()
                     {
                         if (Main::Objects.size() > 0)
                             Main::Objects.front()->Destroy();
+                    }
+                    if (event.key.code == sf::Keyboard::Key::R) //Restart
+                    {
+                        std::cout << "Init Game" << std::endl;
+                        timeElapsed = 0;
+                        _HUD->InitGame();
+                        //Main::EnnemySpawner();
                     }
                 }
                 if (event.type == sf::Event::KeyPressed)

@@ -1,6 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+class Player;
+
 class Object
 {
 public:
@@ -18,5 +20,7 @@ public:
 	void Destroy();
 	Object(ShapeType shapeType, bool willTick);
 	~Object();
+
+	virtual void Init();
 };
 
