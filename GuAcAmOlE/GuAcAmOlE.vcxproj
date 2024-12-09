@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Ennemy.cpp" />
+    <ClCompile Include="Block.cpp" />
     <ClCompile Include="GuAcAmOlE.cpp" />
     <ClCompile Include="HUD.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -144,6 +145,7 @@
   <ItemGroup>
     <ClInclude Include="Ennemy.h" />
     <ClInclude Include="HUD.h" />
+    <ClInclude Include="Block.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Object.h" />

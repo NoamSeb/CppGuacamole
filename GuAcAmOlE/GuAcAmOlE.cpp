@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "Ennemy.h"
 #include "HUD.h"
+#include "Block.h"
 
 int main()
 {
@@ -71,6 +72,8 @@ int main()
             //}
 
         }
+
+        Main::spawnObt(deltaTime);
 
         // LOGIC
 
