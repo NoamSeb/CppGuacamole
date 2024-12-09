@@ -6,6 +6,7 @@
 #include "Ennemy.h"
 #include "HUD.h"
 #include "Block.h"
+#include "ICollider.h"
 
 int main()
 {
@@ -48,11 +49,6 @@ int main()
                         Object* object = new Object(Object::ShapeType::Circle, true);
                     }
 
-                    if (event.key.code == sf::Keyboard::Key::B)
-                    {
-                        if (Main::Objects.size() > 0)
-                            Main::Objects.front()->Destroy();
-                    }
                     if (event.key.code == sf::Keyboard::Key::R) //Restart
                     {
                         std::cout << "Init Game" << std::endl;
@@ -70,13 +66,24 @@ int main()
                 {
                     player.processEvents(event.key.code, false);
                 }
-            //}
-
         }
 
-        Main::spawnObt(deltaTime);
+        // COLLISION
+
+        for (ICollider* colliderA : Main::CollidingObjects) {
+            for (ICollider* colliderB : Main::CollidingObjects) {
+                if (colliderA != colliderB) {
+                    if (colliderA->collisionShape->getGlobalBounds().intersects(colliderB->collisionShape->getGlobalBounds())) { // Both rectangle intersects
+                        dynamic_cast<ICollider*>(colliderA)->OnTriggerEnter(colliderB);
+                        // dynamic_cast<ICollider*>(b)->OnTriggerEnter(a); can be used if we skipped next iteration on same object
+                    }
+                }
+            }
+        }
 
         // LOGIC
+
+        Main::spawnObt(deltaTime);
 
         for (auto objectToTick : Main::Objects) {
             if (objectToTick->bTick) {
@@ -85,7 +92,6 @@ int main()
         }
 
         window.clear();
-        ;
 
         // RENDER
 
