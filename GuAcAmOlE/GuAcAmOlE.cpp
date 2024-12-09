@@ -57,6 +57,7 @@ int main()
                     {
                         std::cout << "Init Game" << std::endl;
                         timeElapsed = 0;
+                        deltaTime = 0;
                         _HUD->InitGame();
                         //Main::EnnemySpawner();
                     }
