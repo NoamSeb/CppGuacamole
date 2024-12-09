@@ -1,10 +1,10 @@
 #include "Main.h"
-
 #include <iostream>
-
 #include "Object.h"
 
 std::list<Object*> Main::Objects;
+std::list<ICollider*> CollidingObjects;
+float time;
 
 void Main::EnnemySpawner()
 {
@@ -16,3 +16,4 @@ void Main::EnnemySpawner()
     }
     std::cout << "Ennemies created" << std::endl;
 }
+

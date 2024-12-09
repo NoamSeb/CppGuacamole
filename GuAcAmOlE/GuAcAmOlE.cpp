@@ -4,6 +4,7 @@
 #include "Object.h"
 #include "Player.h"
 #include "Ennemy.h"
+#include "ICollider.h"
 
 int main()
 {
@@ -32,8 +33,9 @@ int main()
 
                 if (event.key.code == sf::Keyboard::Key::B)
                 {
-                    if (Main::Objects.size() > 0)
-                    Main::Objects.front()->Destroy();
+                    if (Main::Objects.size() > 0) {
+                        Main::Objects.front()->Destroy();
+                    }
                 }
             }
             if (event.type == sf::Event::KeyPressed)
@@ -45,6 +47,27 @@ int main()
                 player.processEvents(event.key.code, false);
             }
 
+        }
+
+        // COLLISION
+
+        std::vector<Object*> objectsToCheck(Main::CollidingObjects.begin(), Main::CollidingObjects.end());
+
+        for (int i = 0; i < objectsToCheck.size(); i++) {
+            for (int j = 0; j < objectsToCheck.size(); j++)
+            {
+                Object* a = objectsToCheck[i];
+                Object* b = objectsToCheck[j];
+                if (i != j) {
+                    //if (CollisionCheck(Main::Objects[i], Main::Objects[j]){
+                    //
+                    //}
+                    if (a->shape->getGlobalBounds().intersects(b->shape->getGlobalBounds())) { // Both rectangle intersects
+                        dynamic_cast<ICollider*>(a)->OnTriggerEnter(b);
+                        dynamic_cast<ICollider*>(b)->OnTriggerEnter(a);
+                    } 
+                }
+            }
         }
 
         // LOGIC
