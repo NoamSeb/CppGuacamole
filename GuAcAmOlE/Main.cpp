@@ -1,10 +1,10 @@
 #include "Main.h"
+
 #include <iostream>
 #include "Object.h"
 
 std::list<Object*> Main::Objects;
-std::list<ICollider*> CollidingObjects;
-float time;
+std::list<ICollider*> Main::CollidingObjects;
 
 void Main::EnnemySpawner()
 {

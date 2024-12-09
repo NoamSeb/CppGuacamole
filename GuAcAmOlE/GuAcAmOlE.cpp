@@ -51,21 +51,13 @@ int main()
 
         // COLLISION
 
-        std::vector<Object*> objectsToCheck(Main::CollidingObjects.begin(), Main::CollidingObjects.end());
-
-        for (int i = 0; i < objectsToCheck.size(); i++) {
-            for (int j = 0; j < objectsToCheck.size(); j++)
-            {
-                Object* a = objectsToCheck[i];
-                Object* b = objectsToCheck[j];
-                if (i != j) {
-                    //if (CollisionCheck(Main::Objects[i], Main::Objects[j]){
-                    //
-                    //}
-                    if (a->shape->getGlobalBounds().intersects(b->shape->getGlobalBounds())) { // Both rectangle intersects
-                        dynamic_cast<ICollider*>(a)->OnTriggerEnter(b);
-                        dynamic_cast<ICollider*>(b)->OnTriggerEnter(a);
-                    } 
+        for (ICollider* colliderA : Main::CollidingObjects) {
+            for (ICollider* colliderB : Main::CollidingObjects) {
+                if (colliderA != colliderB) {
+                    if (colliderA->collisionShape->getGlobalBounds().intersects(colliderB->collisionShape->getGlobalBounds())) { // Both rectangle intersects
+                        dynamic_cast<ICollider*>(colliderA)->OnTriggerEnter(colliderB);
+                        // dynamic_cast<ICollider*>(b)->OnTriggerEnter(a); can be used if we skipped next iteration on same object
+                    }
                 }
             }
         }

@@ -1,8 +1,8 @@
 #pragma once
 #include <list>
-#include "ICollider.h"
 
 class Object;
+class ICollider;
 
 namespace Main
 {

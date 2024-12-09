@@ -1,8 +1,12 @@
 #pragma once
 #include "Object.h"
+#include "ICollider.h"
 
-static class Ennemy : public Object
+class Ennemy : public Object, public ICollider
 {
 	virtual void Tick(float DeltaTime) override;
+
+	// Inherited via ICollider
+	void OnTriggerEnter(ICollider* collider) override;
 };
 
