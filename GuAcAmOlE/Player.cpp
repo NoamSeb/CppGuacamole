@@ -46,6 +46,8 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed)
 
 void Player::Tick(float DeltaTime)
 {
+	Object::Tick(DeltaTime);
+
 	sf::Vector2f movement;
 
 	if (up)
@@ -71,4 +73,8 @@ void Player::Tick(float DeltaTime)
 void Player::drawTo(sf::RenderWindow& window)
 {
 	window.draw((*shape));
+}
+
+void Player::Init() {
+	shape->setPosition(posInit);
 }

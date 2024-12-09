@@ -49,10 +49,12 @@ void Object::Tick(float DeltaTime)
 	if (!bTick) {
 		return;
 	}
-	std::cout << DeltaTime << std::endl;
 }
 
 void Object::Destroy()
 {
 	delete this;
+}
+
+void Object::Init() {
 }
