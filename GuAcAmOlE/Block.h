@@ -5,5 +5,7 @@
 class Block : public Object
 {
 public:
-	virtual void Tick(float DeltaTime) override;
+
+	Block() : Object(Rectangle, true) {}
+	virtual void Tick(float DeltaTime) override; 
 };

@@ -1,6 +1,9 @@
 #include "Main.h"
 #include <vector>
+#include <iostream>
 #include "Object.h"
+//Edit
+#include "Block.h"
 
 std::list<Object*> Main::Objects;
 
@@ -26,7 +29,7 @@ void Main::spawnObt(float deltaTime)
         {
             int index = rand() % copiePosObjt.size();
 
-            Object* object = new Object(Object::ShapeType::Rectangle, true);
+            Block* object = new Block();
             object->shape->setPosition(copiePosObjt[index], 0.0f);
             listObt.push_back(object);
             copiePosObjt.erase(copiePosObjt.begin() + index);
@@ -57,8 +60,8 @@ void Main::InitAllObjects() {
     for (auto it = Main::Objects.begin(); it != Main::Objects.end(); ) {
 
         //Supp tous les enemies
-        if (typeid(**it) != typeid(Player)) { // plus tard == id Ennemy
-            std::cout << " Enemy on supp." << std::endl;
+        if (typeid(**it) == typeid(Block)) { 
+            std::cout << " Block on supp." << std::endl;
             //Check si vrmt supp ou jst n apparait plus
             it = Main::Objects.erase(it);  
         }

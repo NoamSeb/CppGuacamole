@@ -2,8 +2,7 @@
 #include <vector>
 #include <list>
 #include "Object.h"
-#include "Player.h"
-#include "Ennemy.h"
+#include "Block.h"
 
 class Object;
 

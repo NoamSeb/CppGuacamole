@@ -14,7 +14,6 @@ class Player;
 void HUD::InitGame() {
     //Main::DeleteAllEnemies();
     Main::InitAllObjects();
-    //InitPlayer();
 }
 
 
