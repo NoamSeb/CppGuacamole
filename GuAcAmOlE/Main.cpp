@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include "Object.h"
+#include "Ennemy.h"
 //Edit
 #include "Block.h"
 
@@ -16,6 +17,7 @@ float attenteDestroy = 16.0f;
 //float heightEcran = sf::VideoMode::getDesktopMode().height;
 
 float Main::widthEcran;
+float Main::heightEcran;
 std::vector<float> Main::posObt;
 std::list<Block*> listObt;
 
@@ -83,10 +85,12 @@ void Main::DeleteAllObt()
 
 void Main::EnnemySpawner()
 {
-    Object* ennemies[3] = { nullptr };
+    Ennemy* ennemies[3] = { nullptr };
     for (int i = 0; i < 3; ++i) {
-        Object* ennemy = new Object(Object::ShapeType::Circle, true);
-		dynamic_cast<sf::CircleShape*>(ennemy->shape)->setFillColor(sf::Color::Red);
+        Ennemy* ennemy = new Ennemy(Ennemy::ShapeType::Rectangle, true);
+        ennemy->shape->setFillColor(sf::Color::Red);
+        //ennemy->shape->setSize;
+        dynamic_cast<sf::RectangleShape*>(ennemy->shape)->setSize(sf::Vector2f(100, heightEcran));
         ennemies[i] = ennemy;
     }
     std::cout << "Ennemies created" << std::endl;
