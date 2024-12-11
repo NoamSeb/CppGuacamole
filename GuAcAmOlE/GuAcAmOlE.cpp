@@ -38,8 +38,121 @@ int main()
 		timeElapsed += deltaTime;
 		clock.restart();
 
+<<<<<<< Updated upstream
 		sf::Event event;
 		while (window.pollEvent(event)) {
+=======
+        sf::Event event;
+        while (window.pollEvent(event)) {
+
+            // Process any input event here
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+                if (event.type == sf::Event::KeyPressed)
+                {
+                    if (event.key.code == sf::Keyboard::Key::Space)
+                    {
+                        Ennemy* object = new Ennemy(Object::ShapeType::Rectangle, true);
+                    }
+
+                    if (event.key.code == sf::Keyboard::Key::R) //Restart
+                    {
+                        Main::DeleteAllBlocks();
+                        std::cout << "Init Game" << std::endl;
+                        timeElapsed = 0;
+                        deltaTime = 0;
+                        _HUD->InitGame();
+                        //Main::EnnemySpawner();
+                    }
+                }
+                if (event.type == sf::Event::KeyPressed)
+                {
+                    player.processEvents(event.key.code, true);
+                }
+                if (event.type == sf::Event::KeyReleased)
+                {
+                    player.processEvents(event.key.code, false);
+                }
+        }
+
+        // COLLISION
+
+        for (ICollider* colliderA : Main::CollidingObjects) {
+            for (ICollider* colliderB : Main::CollidingObjects) {
+               if (colliderA != colliderB) {
+                   if (colliderA->collisionShape->getGlobalBounds().intersects(colliderB->collisionShape->getGlobalBounds())) { // Both rectangle intersects
+                       colliderA->OnTriggerEnter(colliderB);
+                       // dynamic_cast<ICollider*>(b)->OnTriggerEnter(a); can be used if we skipped next iteration on same object
+                   }
+               }
+            }
+        }
+
+        // LOGIC
+
+        Main::spawnObt(deltaTime);
+
+        for (auto objectToTick : Main::Objects) {
+            if (objectToTick->bTick) {
+                objectToTick->Tick(deltaTime);
+            }
+        }
+
+        window.clear();
+
+        // RENDER
+
+        for (auto objectToDraw : Main::Objects)
+        {
+            window.draw(*(objectToDraw->shape));
+        }
+
+        sf::Text myTimer = _HUD->CreateTimerText(timeElapsed);
+        window.draw(myTimer);
+
+		while (window.isOpen())
+		{
+			float deltaTime = clock.getElapsedTime().asSeconds();
+			timeElapsed += deltaTime;
+			clock.restart();
+
+			sf::Event event;
+			while (window.pollEvent(event)) {
+
+				// Process any input event here
+				if (event.type == sf::Event::Closed) {
+					window.close();
+				}
+				if (event.type == sf::Event::KeyPressed)
+				{
+					if (event.key.code == sf::Keyboard::Key::R) //Restart
+					{
+						if (Main::gameState == Main::GameState::GameOver)
+						{
+							std::cout << "Init Game" << std::endl;
+							timeElapsed = 0;
+							deltaTime = 0;
+							_HUD->InitGame();
+							Main::gameState = Main::GameState::Playing;
+						}
+					}
+
+					if (event.key.code == sf::Keyboard::Key::L) //Restart
+					{
+						window.close();
+					}
+				}
+				if (event.type == sf::Event::KeyPressed)
+				{
+					player.processEvents(event.key.code, true);
+				}
+				if (event.type == sf::Event::KeyReleased)
+				{
+					player.processEvents(event.key.code, false);
+				}
+				//}     
+>>>>>>> Stashed changes
 
 			// Process any input event here
 			if (event.type == sf::Event::Closed) {

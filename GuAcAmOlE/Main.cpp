@@ -4,7 +4,6 @@
 #include "Object.h"
 #include "Ennemy.h"
 //Edit
-#include "Block.h"
 
 std::list<Object*> Main::Objects;
 std::list<ICollider*> Main::CollidingObjects;
@@ -12,6 +11,7 @@ std::list<ICollider*> Main::CollidingObjects;
 float timeSpawn = 0.0f;
 float timeDestroy = 0.0f;
 float attenteDestroy = 16.0f;
+Main::GameState Main::gameState = Main::GameState::GameOver;
 
 //float widthEcran = sf::VideoMode::getDesktopMode().width;
 //float heightEcran = sf::VideoMode::getDesktopMode().height;
@@ -103,4 +103,14 @@ void Main::InitAllObjects() {
         }
         it++;
     }
+}
+void Main::GameOverLogic()
+{
+	std::cout << "Game Over" << std::endl;
+	//Delete all blocks
+	DeleteAllBlocks();
+	Main::CollidingObjects.clear();
+	Main::Objects.clear();
+	//Delete all objects
+	Main::gameState = Main::GameState::GameOver;
 }
