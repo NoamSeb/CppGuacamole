@@ -12,8 +12,8 @@ class Player;
 
 //GameLoop
 void HUD::InitGame() {
-    //Main::DeleteAllEnemies();
     Main::InitAllObjects();
+    Main::DeleteAllBlocks(); // delete all blocks
 }
 
 
