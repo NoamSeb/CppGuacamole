@@ -12,12 +12,8 @@ int main()
 {
 	sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "AvocadoRush", sf::Style::Fullscreen);
 	//sf::RenderWindow window(sf::VideoMode(800, 600), "AvocadoRush");
-<<<<<<< Updated upstream
 	Main::posObt = { 0.0f, (float)window.getSize().y / 3 , (float)window.getSize().y - (float)window.getSize().y / 3};
 
-=======
-	Main::posObt = { 0.0f, ((float)window.getSize().y / 2) - (float)window.getSize().y / 3, (float)window.getSize().y - (float)window.getSize().y / 3 };
->>>>>>> Stashed changes
 	Main::widthEcran = (float)window.getSize().x;
     Main::heightEcran = (float)window.getSize().y + 100;
 	// Main::heightEcran = (float)window.getSize().y;
