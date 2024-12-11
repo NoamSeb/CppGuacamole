@@ -24,7 +24,7 @@ namespace Main
 
 	//extern void spawnObt(float deltaTime, float timeSpawn, std::vector<float> posObt, std::vector<Object*> listObt);
 	extern void spawnObt(float deltaTime);
-	extern void DeleteObt();
+	extern void DeleteTwoFirtsBlocks();
 
 	extern void DeleteAllBlocks();
 };

@@ -14,7 +14,7 @@ int main()
 	//sf::RenderWindow window(sf::VideoMode(800, 600), "AvocadoRush");
 	Main::posObt = { 0.0f, (float)window.getSize().y / 2, (float)window.getSize().y - 120 };
 	Main::widthEcran = (float)window.getSize().x;
-    Main::heightEcran = (float)window.getSize().y;
+    Main::heightEcran = (float)window.getSize().y + 100;
 
 	sf::Clock clock;
 
