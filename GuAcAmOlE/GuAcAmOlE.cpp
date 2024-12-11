@@ -13,11 +13,8 @@ int main()
 	sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "AvocadoRush", sf::Style::Fullscreen);
 	//sf::RenderWindow window(sf::VideoMode(800, 600), "AvocadoRush");
     Main::posObt = { 0.0f, (float)window.getSize().y / 3 , (float)window.getSize().y - (float)window.getSize().y / 3 };
-
 	Main::widthEcran = (float)window.getSize().x;
-    Main::heightEcran = (float)window.getSize().y + 100;
-	// Main::heightEcran = (float)window.getSize().y;
-
+	Main::heightEcran = (float)window.getSize().y;
 
 	sf::Clock clock;
 
@@ -32,10 +29,9 @@ int main()
 	//Timer
 	float timeElapsed = 0;
 
-	float speed = (Main::widthEcran / 3) * timeElapsed;
-    //Restart
-    //bool gameOver = true;
-    
+	//Restart
+	//bool gameOver = true;
+
 	while (window.isOpen())
 	{
 		float deltaTime = clock.getElapsedTime().asSeconds();
@@ -58,12 +54,10 @@ int main()
 
                     if (event.key.code == sf::Keyboard::Key::R) //Restart
                     {
-                        Main::DeleteAllBlocks();
                         std::cout << "Init Game" << std::endl;
                         timeElapsed = 0;
                         deltaTime = 0;
                         _HUD->InitGame();
-                        //Main::EnnemySpawner();
                     }
                 }
                 if (event.type == sf::Event::KeyPressed)

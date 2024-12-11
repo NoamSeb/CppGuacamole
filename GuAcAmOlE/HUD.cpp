@@ -26,9 +26,9 @@ sf::Text HUD::CreateText(std::string text, sf::Color color) {
     sf::Text myText;
     myText.setFont(arial);
     myText.setString(text);
-    //myText.setScale(400,1.5f);
     myText.setFillColor(color);
-    myText.setPosition(350.0f, 5.0f);
+    myText.setPosition(Main::widthEcran/2.0f - 50, 10.0f);
+    myText.setCharacterSize(50);
 
     return myText;
 }
@@ -61,7 +61,7 @@ std::string HUD::FormatMyTimer(float timeInSeconds) {
             min = "0" + min;
         }
         
-        formattedString = "timer : " + min + " : " + sec;
+        formattedString = min + " : " + sec;
 
         return formattedString;
 
