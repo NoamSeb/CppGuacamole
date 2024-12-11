@@ -54,7 +54,7 @@ int main()
 
                     if (event.key.code == sf::Keyboard::Key::R) //Restart
                     {
-                        Main::DeleteAllObt();
+                        Main::DeleteAllBlocks();
                         std::cout << "Init Game" << std::endl;
                         timeElapsed = 0;
                         deltaTime = 0;
