@@ -48,14 +48,14 @@ void Main::spawnObt(float deltaTime)
 
     if (timeDestroy > attenteDestroy)
     {
-        DeleteObt();
+        Main::DeleteTwoFirtsBlocks();
         timeDestroy = 0;
         attenteDestroy = 6.0f;
     }
 }
 
 //Delet two first blocks
-void Main::DeleteObt() 
+void Main::DeleteTwoFirtsBlocks()
 {
     Block* block;
     for (int i = 0; i < 2; i++)
