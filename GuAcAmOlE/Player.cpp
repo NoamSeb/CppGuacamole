@@ -48,22 +48,23 @@ void Player::Tick(float DeltaTime)
 {
 	Object::Tick(DeltaTime);
 
+	sf::Vector2f speed(200, 200);
 	sf::Vector2f movement;
 
 	if (up)
 	{
-		movement.y -= 0.1f;
+		movement.y -= speed.y * DeltaTime;
 
 	}if (down)
 	{
-		movement.y += 0.1f;
+		movement.y += speed.y * DeltaTime;
 	}
 	if (left)
 	{
-		movement.x -= 0.1f;
+		movement.x -= speed.x * DeltaTime;
 	}if (right)
 	{
-		movement.x += 0.1f;
+		movement.x += speed.x * DeltaTime;
 	}
 
 	Move(movement);
