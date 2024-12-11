@@ -7,7 +7,7 @@ void Block::Tick(float DeltaTime)
 
 	sf::Vector2f movement;
 
-	movement.y += 0.125f;
+	movement.x -= 0.125f;
 
 	(*shape).move(movement);
 }
