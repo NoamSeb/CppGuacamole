@@ -34,6 +34,8 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HUD.cpp">
+	<Filter>Source Files</Filter>
+</ClCompile>
     <ClCompile Include="ICollider.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -55,6 +57,8 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HUD.h">
+<Filter>Header Files</Filter>
+</ClCompile>
     <ClInclude Include="ICollider.h">
       <Filter>Header Files</Filter>
     </ClInclude>
