@@ -37,7 +37,11 @@ void Main::spawnObt(float deltaTime)
 
             Block* object = new Block();
             object->SetPosition(widthEcran, copiePosObjt[index]);
+<<<<<<< Updated upstream
             dynamic_cast<sf::RectangleShape*>(object->shape)->setSize(sf::Vector2f(150, heightEcran / 3));
+=======
+            dynamic_cast<sf::RectangleShape*>(object->shape)->setSize(sf::Vector2f(100, heightEcran/3));
+>>>>>>> Stashed changes
             listObt.push_back(object);
             copiePosObjt.erase(copiePosObjt.begin() + index);
         }
