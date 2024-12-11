@@ -49,12 +49,10 @@ int main()
 			{
 				if (event.key.code == sf::Keyboard::Key::R) //Restart
 				{
-					Main::DeleteAllBlocks();
 					std::cout << "Init Game" << std::endl;
 					timeElapsed = 0;
 					deltaTime = 0;
 					_HUD->InitGame();
-					//Main::EnnemySpawner();
 				}
 			}
 			if (event.type == sf::Event::KeyPressed)
