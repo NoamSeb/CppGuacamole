@@ -37,10 +37,22 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed)
 
 	if (!checkPressed)
 	{
-		up = false;
-		down = false;
-		left = false;
-		right = false;
+		if (key == sf::Keyboard::Up)
+		{
+			up = false;
+		}
+		if (key == sf::Keyboard::Down)
+		{
+			down = false;
+		}
+		if (key == sf::Keyboard::Left)
+		{
+			left = false;
+		}
+		if (key == sf::Keyboard::Right)
+		{
+			right = false;
+		}
 	}
 }
 
