@@ -24,13 +24,10 @@ int main()
 
 	Player player(300.0f, 250.0f);
 	//std::cout << player.posInit.x << std::endl;
-	Main::EnnemySpawner();
+    Ennemy* deathZone = nullptr;
 
 	//Timer
 	float timeElapsed = 0;
-
-	//Restart
-	//bool gameOver = true;
 
 	while (window.isOpen())
 	{
@@ -58,6 +55,7 @@ int main()
                         timeElapsed = 0;
                         deltaTime = 0;
                         _HUD->InitGame();
+                        //Main::InitGame();
                     }
                 }
                 if (event.type == sf::Event::KeyPressed)

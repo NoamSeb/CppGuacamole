@@ -4,6 +4,7 @@
 #include "Object.h"
 #include "Block.h"
 
+class Ennemy;
 class Object;
 class ICollider;
 
@@ -20,7 +21,7 @@ namespace Main
 
 	extern GameState gameState;
 
-	void EnnemySpawner();
+	Ennemy* SpawnDeathZone();
 	void InitAllObjects();
 	//extern float timeSpawn;
 	//
@@ -37,4 +38,5 @@ namespace Main
 
 	extern void DeleteAllBlocks();
 	extern void GameOverLogic();
+	//extern void InitGame();
 };

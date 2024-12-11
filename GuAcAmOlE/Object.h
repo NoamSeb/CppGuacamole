@@ -17,8 +17,8 @@ public:
 	};
 
 	Object(ShapeType shapeType, bool willTick);
-	Object(ShapeType shapeType, bool willTick, float x, float y);
-	Object(ShapeType shapeType, bool willTick, float radius);
+	Object(bool willTick, float width, float height);
+	Object(bool willTick, float radius);
 	~Object();
 
 	virtual void Tick(float DeltaTime);

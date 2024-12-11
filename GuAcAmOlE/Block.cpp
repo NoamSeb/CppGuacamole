@@ -21,12 +21,9 @@ void Block::OnTriggerEnter(ICollider* collider)
 	float result = sdBox(collider->collisionShape->getPosition() - collisionShape->getPosition(), sf::Vector2f(50, 50));
 	if (result > 0)
 	{
-		if (Player* player = dynamic_cast<Player*>(collider)) {
-			// If enemy hit player
+		if (Player* player = dynamic_cast<Player*>(collider)) { // If enemy hit player
 			player->Move(sf::Vector2f(-result, 0));
-			std::cout << "Player hit block" << std::endl;
 		}
-		std::cout << "Collision happened" << std::endl;
 	}
 }
 

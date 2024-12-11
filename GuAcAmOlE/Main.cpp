@@ -78,21 +78,17 @@ void Main::DeleteAllBlocks()
     for (auto it = listObt.begin(); it != listObt.end(); ) {
         delete* it;
         it = listObt.erase(it);
+
     }
     listObt.clear();
 }
 
-void Main::EnnemySpawner()
+Ennemy* Main::SpawnDeathZone()
 {
-    Ennemy* ennemies[3] = { nullptr };
-    for (int i = 0; i < 3; ++i) {
-        Ennemy* ennemy = new Ennemy(Ennemy::ShapeType::Rectangle, true);
-        ennemy->shape->setFillColor(sf::Color::Red);
-        //ennemy->shape->setSize;
-        dynamic_cast<sf::RectangleShape*>(ennemy->shape)->setSize(sf::Vector2f(100, heightEcran));
-        ennemies[i] = ennemy;
-    }
+    Ennemy* ennemy = new Ennemy(100, heightEcran);
+    ennemy->shape->setFillColor(sf::Color::Red);
     std::cout << "Ennemies created" << std::endl;
+    return ennemy;
 }
 
 
@@ -105,13 +101,23 @@ void Main::InitAllObjects() {
         it++;
     }
 }
+
 void Main::GameOverLogic()
 {
-	std::cout << "Game Over" << std::endl;
-	//Delete all blocks
-	DeleteAllBlocks();
-	Main::CollidingObjects.clear();
-	Main::Objects.clear();
-	//Delete all objects
-	Main::gameState = Main::GameState::GameOver;
+    std::cout << "Game Over" << std::endl;
+    //Delete all blocks
+    DeleteAllBlocks();
+    Main::CollidingObjects.clear();
+    Main::Objects.clear();
+    //Delete all objects
+    Main::gameState = Main::GameState::GameOver;
 }
+
+// void InitGame() {
+//     std::cout << "Init Game" << std::endl;
+//     Main::SpawnDeathZone();
+//     Main::DeleteAllBlocks();
+//     timeElapsed = 0;
+//     deltaTime = 0;
+//     _HUD->InitGame();
+// }
