@@ -9,6 +9,7 @@ std::list<Object*> Main::Objects;
 
 float timeSpawn = 0.0f;
 float timeSpawn2 = 0.0f;
+float attenteDestroy = 9.0f;
 
 //float widthEcran = sf::VideoMode::getDesktopMode().width;
 //float heightEcran = sf::VideoMode::getDesktopMode().height;
@@ -41,10 +42,11 @@ void Main::spawnObt(float deltaTime)
         timeSpawn = 0;
 	}
 
-    if (timeSpawn2 > 4)
+    if (timeSpawn2 > attenteDestroy)
     {
         DeleteObt();
         timeSpawn2 = 0;
+        attenteDestroy = 2.0f;
     }
 }
 
