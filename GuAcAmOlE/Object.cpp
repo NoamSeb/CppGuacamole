@@ -18,6 +18,7 @@ Object::Object(ShapeType shapeType, bool willTick) {
 
 		shape = new sf::RectangleShape();
 		dynamic_cast<sf::RectangleShape*>(shape)->setSize(sf::Vector2f(100, 100));
+		shape->setOrigin(50, 50);
 
 		break;
 	default:
