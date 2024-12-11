@@ -18,21 +18,18 @@ int main()
 
 	sf::Clock clock;
 
-	//Get l'instance de HUD
-	HUD* _HUD = HUD::getInstance();
-	_HUD->LoadFont(); // pr tous les texts
-
-	Player player(300.0f, 250.0f);
+	
 	//std::cout << player.posInit.x << std::endl;
     Ennemy* deathZone = nullptr;
 
 	//Timer
-	float timeElapsed = 0;
+	
+    Main::InitGame();
 
 	while (window.isOpen())
 	{
 		float deltaTime = clock.getElapsedTime().asSeconds();
-		timeElapsed += deltaTime;
+		Main::timeElapsed += deltaTime;
 		clock.restart();
 
         sf::Event event;
@@ -52,19 +49,16 @@ int main()
                     if (event.key.code == sf::Keyboard::Key::R) //Restart
                     {
                         std::cout << "Init Game" << std::endl;
-                        timeElapsed = 0;
-                        deltaTime = 0;
-                        _HUD->InitGame();
-                        //Main::InitGame();
+                        Main::InitGame();
                     }
                 }
                 if (event.type == sf::Event::KeyPressed)
                 {
-                    player.processEvents(event.key.code, true);
+                    Main::player->processEvents(event.key.code, true);
                 }
                 if (event.type == sf::Event::KeyReleased)
                 {
-                    player.processEvents(event.key.code, false);
+                    Main::player->processEvents(event.key.code, false);
                 }
         }
 
@@ -100,7 +94,7 @@ int main()
             window.draw(*(objectToDraw->shape));
         }
 
-        sf::Text myTimer = _HUD->CreateTimerText(timeElapsed);
+        sf::Text myTimer = Main::_HUD->CreateTimerText(Main::timeElapsed);
         window.draw(myTimer);
 
 		window.display();

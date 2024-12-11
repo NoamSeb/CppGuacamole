@@ -1,12 +1,21 @@
 #include "Main.h"
+
 #include <vector>
 #include <iostream>
 #include "Object.h"
 #include "Ennemy.h"
+#include "HUD.h"
+#include "Block.h"
+#include "Player.h"
+
 //Edit
 
 std::list<Object*> Main::Objects;
 std::list<ICollider*> Main::CollidingObjects;
+
+Player* Main::player;
+HUD* Main::_HUD;
+float Main::timeElapsed;
 
 float timeSpawn = 0.0f;
 float timeDestroy = 0.0f;
@@ -113,11 +122,12 @@ void Main::GameOverLogic()
     Main::gameState = Main::GameState::GameOver;
 }
 
-// void InitGame() {
-//     std::cout << "Init Game" << std::endl;
-//     Main::SpawnDeathZone();
-//     Main::DeleteAllBlocks();
-//     timeElapsed = 0;
-//     deltaTime = 0;
-//     _HUD->InitGame();
-// }
+void Main::InitGame() {
+    std::cout << "Init Game" << std::endl;
+    player = new Player(300.0f, 250.0f);
+    SpawnDeathZone();
+    DeleteAllBlocks();
+    _HUD = HUD::getInstance();
+    _HUD->LoadFont(); // pr tous les texts
+    timeElapsed = 0;
+}

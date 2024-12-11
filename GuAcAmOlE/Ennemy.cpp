@@ -13,7 +13,6 @@ void Ennemy::Tick(float DeltaTime)
 
 void Ennemy::OnTriggerEnter(ICollider* collider)
 {
-	std::cout << "Trigger DEATH ZONE" << std::endl;
 	if (dynamic_cast<Player*>(collider)) {
 		// If enemy hit player
 		Main::GameOverLogic();

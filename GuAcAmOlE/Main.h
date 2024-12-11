@@ -1,12 +1,12 @@
 #pragma once
 #include <vector>
 #include <list>
-#include "Object.h"
-#include "Block.h"
 
 class Ennemy;
 class Object;
 class ICollider;
+class HUD;
+class Player;
 
 namespace Main
 {
@@ -20,6 +20,9 @@ namespace Main
 	};
 
 	extern GameState gameState;
+	extern HUD* _HUD;
+	extern Player* player;
+	extern float timeElapsed;
 
 	Ennemy* SpawnDeathZone();
 	void InitAllObjects();
@@ -38,5 +41,5 @@ namespace Main
 
 	extern void DeleteAllBlocks();
 	extern void GameOverLogic();
-	//extern void InitGame();
+	extern void InitGame();
 };

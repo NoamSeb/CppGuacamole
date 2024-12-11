@@ -10,6 +10,7 @@ class HUD
 				instance = new HUD;
 				return instance;
 			}
+			return nullptr;
 		}
 
 		//Fonctions publiques
