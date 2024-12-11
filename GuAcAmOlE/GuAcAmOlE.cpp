@@ -76,9 +76,7 @@ int main()
         for (ICollider* colliderA : Main::CollidingObjects) {
             for (ICollider* colliderB : Main::CollidingObjects) {
                if (colliderA != colliderB) {
-                   std::cout << "ColliderA: " << colliderA->collisionShape->getPosition().x << ", " << colliderA->collisionShape->getPosition().y << " ColliderB: " << colliderB->collisionShape->getPosition().x << ", " << colliderB->collisionShape->getPosition().y << std::endl;
                    if (colliderA->collisionShape->getGlobalBounds().intersects(colliderB->collisionShape->getGlobalBounds())) { // Both rectangle intersects
-                       std::cout << "COLLISION" << std::endl;
                        colliderA->OnTriggerEnter(colliderB);
                        // dynamic_cast<ICollider*>(b)->OnTriggerEnter(a); can be used if we skipped next iteration on same object
                    }

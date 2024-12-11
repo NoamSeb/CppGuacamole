@@ -9,7 +9,7 @@ std::list<Object*> Main::Objects;
 std::list<ICollider*> Main::CollidingObjects;
 
 float timeSpawn = 0.0f;
-float timeSpawn2 = 0.0f;
+float timeSpawn2 = -2;
 
 //float widthEcran = sf::VideoMode::getDesktopMode().width;
 //float heightEcran = sf::VideoMode::getDesktopMode().height;
@@ -42,7 +42,7 @@ void Main::spawnObt(float deltaTime)
         timeSpawn = 0;
 	}
 
-    if (timeSpawn2 > 4)
+    if (timeSpawn2 > 2)
     {
         DeleteObt();
         timeSpawn2 = 0;

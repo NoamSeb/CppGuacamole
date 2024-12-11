@@ -16,13 +16,16 @@ public:
 		Triangle
 	};
 
+	Object(ShapeType shapeType, bool willTick);
+	Object(ShapeType shapeType, bool willTick, float x, float y);
+	Object(ShapeType shapeType, bool willTick, float radius);
+	~Object();
+
 	virtual void Tick(float DeltaTime);
-	void Destroy();
+	virtual void Destroy();
 	void Move(sf::Vector2f pos);
 	void SetPosition(sf::Vector2f pos);
 	void SetPosition(float x, float y);
-	Object(ShapeType shapeType, bool willTick);
-	~Object();
 
 	virtual void Init();
 };
