@@ -59,5 +59,18 @@ void Object::Move(sf::Vector2f pos)
 	}
 }
 
+void Object::SetPosition(sf::Vector2f pos)
+{
+	shape->setPosition(pos);
+	if (ICollider* coll = dynamic_cast<ICollider*>(this)) {
+		coll->collisionShape->setPosition(pos);
+	}
+}
+
+void Object::SetPosition(float x, float y)
+{
+	SetPosition(sf::Vector2f(x, y));
+}
+
 void Object::Init() {
 }

@@ -34,7 +34,7 @@ void Main::spawnObt(float deltaTime)
             int index = rand() % copiePosObjt.size();
 
             Block* object = new Block();
-            object->shape->setPosition(widthEcran, copiePosObjt[index]);
+            object->SetPosition(widthEcran, copiePosObjt[index]);
             listObt.push_back(object);
             copiePosObjt.erase(copiePosObjt.begin() + index);
         }
