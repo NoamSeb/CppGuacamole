@@ -10,28 +10,27 @@
 
 int main()
 {
-    //sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "AvocadoRush", sf::Style::Fullscreen);
-    sf::RenderWindow window(sf::VideoMode(800, 600), "AvocadoRush");
+	sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "AvocadoRush", sf::Style::Fullscreen);
+	//sf::RenderWindow window(sf::VideoMode(800, 600), "AvocadoRush");
+	Main::posObt = { 0.0f, (float)window.getSize().y / 2, (float)window.getSize().y - 120 };
+	Main::widthEcran = (float)window.getSize().x;
 
-    sf::Vector2u test = window.getSize();
-    std::cout << test.x << test.y << std::endl;
-    sf::Clock clock;
+	sf::Clock clock;
 
-    //Get l'instance de HUD
-    HUD* _HUD = HUD::getInstance();
-    _HUD->LoadFont(); // pr tous les texts
+	//Get l'instance de HUD
+	HUD* _HUD = HUD::getInstance();
+	_HUD->LoadFont(); // pr tous les texts
 
-    Player player(300.0f, 250.0f);
-    //std::cout << player.posInit.x << std::endl;
+	Player player(300.0f, 250.0f);
+	//std::cout << player.posInit.x << std::endl;
 	Main::EnnemySpawner();
 
-    //Timer
-    float timeElapsed=0;
+	//Timer
+	float timeElapsed = 0;
 
     //Restart
     //bool gameOver = true;
 
-    
     while (window.isOpen()) 
     {
         float deltaTime = clock.getElapsedTime().asSeconds();
@@ -54,6 +53,7 @@ int main()
 
                     if (event.key.code == sf::Keyboard::Key::R) //Restart
                     {
+                        Main::DeleteAllObt();
                         std::cout << "Init Game" << std::endl;
                         timeElapsed = 0;
                         deltaTime = 0;
@@ -108,7 +108,6 @@ int main()
         sf::Text myTimer = _HUD->CreateTimerText(timeElapsed);
         window.draw(myTimer);
 
-
-        window.display();
-    }
+		window.display();
+	}
 }
