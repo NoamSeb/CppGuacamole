@@ -66,7 +66,7 @@ void Player::Tick(float DeltaTime)
 		movement.x += 0.1f;
 	}
 
-	(*shape).move(movement);
+	Move(movement);
 
 }
 

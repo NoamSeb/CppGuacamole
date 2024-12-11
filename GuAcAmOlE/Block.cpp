@@ -9,5 +9,5 @@ void Block::Tick(float DeltaTime)
 
 	movement.x -= 0.125f;
 
-	(*shape).move(movement);
+	Move(movement);
 }
