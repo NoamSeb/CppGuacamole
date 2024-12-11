@@ -49,7 +49,7 @@ void Main::spawnObt(float deltaTime)
     }
 }
 
-
+//Delet two first blocks
 void Main::DeleteObt() 
 {
     Block* block;
@@ -62,14 +62,11 @@ void Main::DeleteObt()
     //listObt.clear();
 }
 
-void Main::DeleteAllObt()
+void Main::DeleteAllBlocks()
 {
-    Block* block;
-    for (int i = 0; i < listObt.size(); i++)
-    {
-        block = listObt.front();
-        listObt.pop_front();
-        block->Destroy();
+    for (auto it = listObt.begin(); it != listObt.end(); ) {
+        delete* it;
+        it = listObt.erase(it);
     }
     listObt.clear();
 }
@@ -85,25 +82,13 @@ void Main::EnnemySpawner()
     std::cout << "Ennemies created" << std::endl;
 }
 
-void Main::DeleteAllEnemies() {
-}
 
-
-//Main::DeleteAllObt()
 void Main::InitAllObjects() {
     for (auto it = Main::Objects.begin(); it != Main::Objects.end(); ) {
-
-        //Supp tous les enemies
-        if (typeid(**it) == typeid(Block)) { 
-            std::cout << " Block on supp." << std::endl;
-            //Check si vrmt supp ou jst n apparait plus
-            it = Main::Objects.erase(it);  
-        }
-
-        // init etat de tout autre objet
-        else {
+        //Pas d'initialistation pr les blocks qui vont etre supp par la suite
+        if (typeid(**it) != typeid(Block)) { 
             (*it)->Init();
-            ++it;
         }
+        it++;
     }
 }

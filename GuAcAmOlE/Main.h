@@ -12,7 +12,6 @@ namespace Main
 	extern std::list<Object*> Objects;
 	extern std::list<ICollider*> CollidingObjects;
 	void EnnemySpawner();
-	void DeleteAllEnemies();
 	void InitAllObjects();
 	//extern float timeSpawn;
 	//
@@ -26,5 +25,5 @@ namespace Main
 	extern void spawnObt(float deltaTime);
 	extern void DeleteObt();
 
-	extern void DeleteAllObt();
+	extern void DeleteAllBlocks();
 };
