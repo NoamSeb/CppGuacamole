@@ -18,6 +18,7 @@ public:
 
 	virtual void Tick(float DeltaTime);
 	void Destroy();
+	void Move(sf::Vector2f pos);
 	Object(ShapeType shapeType, bool willTick);
 	~Object();
 

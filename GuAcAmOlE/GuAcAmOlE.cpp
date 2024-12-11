@@ -10,8 +10,11 @@
 
 int main()
 {
-  //sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "AvocadoRush", sf::Style::Fullscreen);
+    //sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "AvocadoRush", sf::Style::Fullscreen);
     sf::RenderWindow window(sf::VideoMode(800, 600), "AvocadoRush");
+
+    sf::Vector2u test = window.getSize();
+    std::cout << test.x << test.y << std::endl;
     sf::Clock clock;
 
     //Get l'instance de HUD
@@ -46,7 +49,7 @@ int main()
                 {
                     if (event.key.code == sf::Keyboard::Key::Space)
                     {
-                        Object* object = new Object(Object::ShapeType::Circle, true);
+                        Ennemy* object = new Ennemy(Object::ShapeType::Circle, true);
                     }
 
                     if (event.key.code == sf::Keyboard::Key::R) //Restart
@@ -72,12 +75,14 @@ int main()
 
         for (ICollider* colliderA : Main::CollidingObjects) {
             for (ICollider* colliderB : Main::CollidingObjects) {
-                if (colliderA != colliderB) {
-                    if (colliderA->collisionShape->getGlobalBounds().intersects(colliderB->collisionShape->getGlobalBounds())) { // Both rectangle intersects
-                        dynamic_cast<ICollider*>(colliderA)->OnTriggerEnter(colliderB);
-                        // dynamic_cast<ICollider*>(b)->OnTriggerEnter(a); can be used if we skipped next iteration on same object
-                    }
-                }
+               if (colliderA != colliderB) {
+                   std::cout << "ColliderA: " << colliderA->collisionShape->getPosition().x << ", " << colliderA->collisionShape->getPosition().y << " ColliderB: " << colliderB->collisionShape->getPosition().x << ", " << colliderB->collisionShape->getPosition().y << std::endl;
+                   if (colliderA->collisionShape->getGlobalBounds().intersects(colliderB->collisionShape->getGlobalBounds())) { // Both rectangle intersects
+                       std::cout << "COLLISION" << std::endl;
+                       colliderA->OnTriggerEnter(colliderB);
+                       // dynamic_cast<ICollider*>(b)->OnTriggerEnter(a); can be used if we skipped next iteration on same object
+                   }
+               }
             }
         }
 

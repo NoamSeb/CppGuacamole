@@ -7,7 +7,7 @@ class Object;
 
 void Ennemy::Tick(float DeltaTime)
 {
-	std::cout << "Ennemy ticked" << std::endl;
+	// std::cout << "Ennemy ticked" << std::endl;
 }
 
 void Ennemy::OnTriggerEnter(ICollider* collider)
