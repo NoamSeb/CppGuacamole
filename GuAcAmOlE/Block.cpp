@@ -5,7 +5,7 @@
 #include "Player.h"
 
 
-void Block::Tick(float speed)
+void Block::Tick(float DeltaTime)
 {
 	//(*shape).move(0.0f, 1.1f);
 
