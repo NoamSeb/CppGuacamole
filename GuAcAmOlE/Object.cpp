@@ -18,6 +18,7 @@ Object::Object(ShapeType shapeType, bool willTick) {
 
 		shape = new sf::RectangleShape();
 		dynamic_cast<sf::RectangleShape*>(shape)->setSize(sf::Vector2f(100, 100));
+		shape->setOrigin(50, 50);
 
 		break;
 	default:
@@ -56,6 +57,19 @@ void Object::Move(sf::Vector2f pos)
 	if (ICollider* coll = dynamic_cast<ICollider*>(this)) {
 		coll->collisionShape->move(pos);
 	}
+}
+
+void Object::SetPosition(sf::Vector2f pos)
+{
+	shape->setPosition(pos);
+	if (ICollider* coll = dynamic_cast<ICollider*>(this)) {
+		coll->collisionShape->setPosition(pos);
+	}
+}
+
+void Object::SetPosition(float x, float y)
+{
+	SetPosition(sf::Vector2f(x, y));
 }
 
 void Object::Init() {

@@ -75,6 +75,11 @@ void Player::drawTo(sf::RenderWindow& window)
 	window.draw((*shape));
 }
 
+void Player::OnTriggerEnter(ICollider* collider)
+{
+	// Player collided with something
+}
+
 void Player::Init() {
 	shape->setPosition(posInit);
 }

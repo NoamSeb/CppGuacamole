@@ -1,14 +1,18 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <iostream>
+
 #include "wtypes.h"
 #include "Object.h"
+#include "ICollider.h"
 
-class Player : public Object
+class Player : public Object, public ICollider
 {
 public:
-	Player(float x, float y) : Object(Circle, true), posInit(x, y) {
+	Player(float x, float y) : Object(Circle, true), posInit(x, y), ICollider (Circle){
 		shape->setPosition(posInit);
+		collisionShape->setPosition(posInit);
+		
 	};
 
 	virtual void Init() override;
@@ -27,5 +31,8 @@ private:
 
 	//Recup pos init
 	sf::Vector2f posInit;
+
+	// Inherited via ICollider
+	void OnTriggerEnter(ICollider* collider) override;
 };
 
