@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include "Object.h"
+#include "Ennemy.h"
 //Edit
 #include "Block.h"
 
@@ -9,12 +10,14 @@ std::list<Object*> Main::Objects;
 std::list<ICollider*> Main::CollidingObjects;
 
 float timeSpawn = 0.0f;
-float timeSpawn2 = -2;
+float timeDestroy = 0.0f;
+float attenteDestroy = 16.0f;
 
 //float widthEcran = sf::VideoMode::getDesktopMode().width;
 //float heightEcran = sf::VideoMode::getDesktopMode().height;
 
 float Main::widthEcran;
+float Main::heightEcran;
 std::vector<float> Main::posObt;
 std::list<Block*> listObt;
 
@@ -23,9 +26,9 @@ bool verif = false;
 void Main::spawnObt(float deltaTime)
 {
     timeSpawn += deltaTime;
-    timeSpawn2 += deltaTime;
+    timeDestroy += deltaTime;
 
-	if (timeSpawn > 2)
+	if (timeSpawn > 4)
 	{
         std::vector<float> copiePosObjt = posObt;
 
@@ -42,14 +45,15 @@ void Main::spawnObt(float deltaTime)
         timeSpawn = 0;
 	}
 
-    if (timeSpawn2 > 2)
+    if (timeDestroy > attenteDestroy)
     {
         DeleteObt();
-        timeSpawn2 = 0;
+        timeDestroy = 0;
+        attenteDestroy = 6.0f;
     }
 }
 
-
+//Delet two first blocks
 void Main::DeleteObt() 
 {
     Block* block;
@@ -62,50 +66,41 @@ void Main::DeleteObt()
     //listObt.clear();
 }
 
-void Main::DeleteAllObt()
+void Main::DeleteAllBlocks()
 {
-    Block* block;
-    for (int i = 0; i < listObt.size(); i++)
-    {
-        block = listObt.front();
-        listObt.pop_front();
-        block->Destroy();
+    //Init Blocks values
+    timeSpawn = 0.0f;
+    timeDestroy = 0.0f;
+    attenteDestroy = 16.0f;
+
+    //Delete all Blocks
+    for (auto it = listObt.begin(); it != listObt.end(); ) {
+        delete* it;
+        it = listObt.erase(it);
     }
     listObt.clear();
 }
 
 void Main::EnnemySpawner()
 {
-    Object* ennemies[3] = { nullptr };
+    Ennemy* ennemies[3] = { nullptr };
     for (int i = 0; i < 3; ++i) {
-        Object* ennemy = new Object(Object::ShapeType::Circle, true);
-		dynamic_cast<sf::CircleShape*>(ennemy->shape)->setFillColor(sf::Color::Red);
+        Ennemy* ennemy = new Ennemy(Ennemy::ShapeType::Rectangle, true);
+        ennemy->shape->setFillColor(sf::Color::Red);
+        //ennemy->shape->setSize;
+        dynamic_cast<sf::RectangleShape*>(ennemy->shape)->setSize(sf::Vector2f(100, heightEcran));
         ennemies[i] = ennemy;
     }
     std::cout << "Ennemies created" << std::endl;
 }
 
-void Main::DeleteAllEnemies() {
-}
-
-
-//Main::DeleteAllObt()
-
 
 void Main::InitAllObjects() {
     for (auto it = Main::Objects.begin(); it != Main::Objects.end(); ) {
-
-        //Supp tous les enemies
-        if (typeid(**it) == typeid(Block)) { 
-            std::cout << " Block on supp." << std::endl;
-            //Check si vrmt supp ou jst n apparait plus
-            it = Main::Objects.erase(it);  
-        }
-
-        // init etat de tout autre objet
-        else {
+        //Pas d'initialistation pr les blocks qui vont etre supp par la suite
+        if (typeid(**it) != typeid(Block)) { 
             (*it)->Init();
-            ++it;
         }
+        it++;
     }
 }
