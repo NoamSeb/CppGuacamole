@@ -19,6 +19,7 @@ namespace Main
 	//extern std::vector<Object*> listObt;
 
 	extern float widthEcran;
+	extern float heightEcran;
 
 
 	//extern void spawnObt(float deltaTime, float timeSpawn, std::vector<float> posObt, std::vector<Object*> listObt);
