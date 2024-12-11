@@ -6,6 +6,7 @@
 #include "Block.h"
 
 std::list<Object*> Main::Objects;
+std::list<ICollider*> Main::CollidingObjects;
 
 float timeSpawn = 0.0f;
 float timeSpawn2 = 0.0f;
@@ -86,13 +87,13 @@ void Main::EnnemySpawner()
     std::cout << "Ennemies created" << std::endl;
 }
 
-
-
 void Main::DeleteAllEnemies() {
 }
 
 
 //Main::DeleteAllObt()
+
+
 void Main::InitAllObjects() {
     for (auto it = Main::Objects.begin(); it != Main::Objects.end(); ) {
 

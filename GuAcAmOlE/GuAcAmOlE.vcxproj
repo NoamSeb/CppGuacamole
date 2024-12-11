@@ -137,6 +137,7 @@
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="GuAcAmOlE.cpp" />
     <ClCompile Include="HUD.cpp" />
+    <ClCompile Include="ICollider.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="MathUtils.cpp" />
     <ClCompile Include="Object.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Ennemy.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Block.h" />
+    <ClInclude Include="ICollider.h" />
     <ClInclude Include="Main.h" />
     <ClInclude Include="MathUtils.h" />
     <ClInclude Include="Object.h" />

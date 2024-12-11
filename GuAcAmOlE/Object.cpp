@@ -1,7 +1,7 @@
 #include "Object.h"
 #include <iostream>
 #include "Main.h"
-
+#include "ICollider.h"
 
 Object::Object(ShapeType shapeType, bool willTick) {
 	bTick = willTick;
@@ -18,12 +18,6 @@ Object::Object(ShapeType shapeType, bool willTick) {
 
 		shape = new sf::RectangleShape();
 		dynamic_cast<sf::RectangleShape*>(shape)->setSize(sf::Vector2f(100, 100));
-
-		break;
-	case Triangle:
-
-		shape = new sf::ConvexShape();
-		dynamic_cast<sf::ConvexShape*>(shape)->setPointCount(3);
 
 		break;
 	default:
@@ -54,6 +48,14 @@ void Object::Tick(float DeltaTime)
 void Object::Destroy()
 {
 	delete this;
+}
+
+void Object::Move(sf::Vector2f pos)
+{
+	shape->move(pos);
+	if (ICollider* coll = dynamic_cast<ICollider*>(this)) {
+		coll->collisionShape->move(pos);
+	}
 }
 
 void Object::Init() {

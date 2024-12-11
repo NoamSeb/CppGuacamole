@@ -6,6 +6,7 @@
 #include "Ennemy.h"
 #include "HUD.h"
 #include "Block.h"
+#include "ICollider.h"
 
 int main()
 {
@@ -27,85 +28,85 @@ int main()
 	//Timer
 	float timeElapsed = 0;
 
-	//Restart
-	//bool gameOver = true;
+    //Restart
+    //bool gameOver = true;
 
+    while (window.isOpen()) 
+    {
+        float deltaTime = clock.getElapsedTime().asSeconds();
+        timeElapsed += deltaTime;
+        clock.restart();
 
-	while (window.isOpen())
-	{
-		float deltaTime = clock.getElapsedTime().asSeconds();
-		timeElapsed += deltaTime;
-		clock.restart();
+        sf::Event event;
+        while (window.pollEvent(event)) {
 
-		sf::Event event;
-		while (window.pollEvent(event)) {
+            // Process any input event here
+            if (event.type == sf::Event::Closed) {
+                window.close();
+            }
+                if (event.type == sf::Event::KeyPressed)
+                {
+                    if (event.key.code == sf::Keyboard::Key::Space)
+                    {
+                        Ennemy* object = new Ennemy(Object::ShapeType::Circle, true);
+                    }
 
-			// Process any input event here
-			if (event.type == sf::Event::Closed) {
-				window.close();
-			}
-			if (event.type == sf::Event::KeyPressed)
-			{
-				if (event.key.code == sf::Keyboard::Key::Space)
-				{
-					Object* object = new Object(Object::ShapeType::Circle, true);
-				}
+                    if (event.key.code == sf::Keyboard::Key::R) //Restart
+                    {
+                        Main::DeleteAllObt();
+                        std::cout << "Init Game" << std::endl;
+                        timeElapsed = 0;
+                        deltaTime = 0;
+                        _HUD->InitGame();
+                        //Main::EnnemySpawner();
+                    }
+                }
+                if (event.type == sf::Event::KeyPressed)
+                {
+                    player.processEvents(event.key.code, true);
+                }
+                if (event.type == sf::Event::KeyReleased)
+                {
+                    player.processEvents(event.key.code, false);
+                }
+        }
 
-				if (event.key.code == sf::Keyboard::Key::B)
-				{
-					if (Main::Objects.size() > 0)
-						Main::Objects.front()->Destroy();
-				}
-				if (event.key.code == sf::Keyboard::Key::R) //Restart
-				{
-					Main::DeleteAllObt();
-					std::cout << "Init Game" << std::endl;
-					timeElapsed = 0;
-					deltaTime = 0;
-					_HUD->InitGame();
-					//Main::EnnemySpawner();
-				}
+        // COLLISION
 
-				if (event.key.code == sf::Keyboard::Key::L) //Restart
-				{
-					window.close();
-				}
-			}
-			if (event.type == sf::Event::KeyPressed)
-			{
-				player.processEvents(event.key.code, true);
-			}
-			if (event.type == sf::Event::KeyReleased)
-			{
-				player.processEvents(event.key.code, false);
-			}
-			//}     
+        for (ICollider* colliderA : Main::CollidingObjects) {
+            for (ICollider* colliderB : Main::CollidingObjects) {
+               if (colliderA != colliderB) {
+                   std::cout << "ColliderA: " << colliderA->collisionShape->getPosition().x << ", " << colliderA->collisionShape->getPosition().y << " ColliderB: " << colliderB->collisionShape->getPosition().x << ", " << colliderB->collisionShape->getPosition().y << std::endl;
+                   if (colliderA->collisionShape->getGlobalBounds().intersects(colliderB->collisionShape->getGlobalBounds())) { // Both rectangle intersects
+                       std::cout << "COLLISION" << std::endl;
+                       colliderA->OnTriggerEnter(colliderB);
+                       // dynamic_cast<ICollider*>(b)->OnTriggerEnter(a); can be used if we skipped next iteration on same object
+                   }
+               }
+            }
+        }
 
-		}
+        // LOGIC
 
-		Main::spawnObt(deltaTime);
+        Main::spawnObt(deltaTime);
 
-		// LOGIC    
+        for (auto objectToTick : Main::Objects) {
+            if (objectToTick->bTick) {
+                objectToTick->Tick(deltaTime);
+            }
+        }
 
-		for (auto objectToTick : Main::Objects) {
-			if (objectToTick->bTick) {
-				objectToTick->Tick(deltaTime);
-			}
-		}
+        window.clear();
 
-		window.clear();
-		;
+        // RENDER
 
-		// RENDER
+        for (auto objectToDraw : Main::Objects)
+        {
+            window.draw(*(objectToDraw->shape));
+        }
 
-		for (auto objectToDraw : Main::Objects)
-		{
-			window.draw(*(objectToDraw->shape));
-		}
-
-		sf::Text myTimer = _HUD->CreateTimerText(timeElapsed);
-		window.draw(myTimer);
-
+        sf::Text myTimer = _HUD->CreateTimerText(timeElapsed);
+        window.draw(myTimer);
 
 		window.display();
 	}
