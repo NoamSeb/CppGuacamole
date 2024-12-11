@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "Player.h"
+#include "Main.h"
 
 class Object;
 
@@ -14,6 +15,8 @@ void Ennemy::OnTriggerEnter(ICollider* collider)
 {
 	if (dynamic_cast<Player*>(collider)) {
 		// If enemy hit player
+		Main::GameOverLogic();
 	}
 	std::cout << "Collision happened" << std::endl;
 }
+

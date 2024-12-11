@@ -11,6 +11,15 @@ namespace Main
 {
 	extern std::list<Object*> Objects;
 	extern std::list<ICollider*> CollidingObjects;
+
+	enum GameState
+	{
+		Playing,
+		GameOver
+	};
+
+	extern GameState gameState;
+
 	void EnnemySpawner();
 	void InitAllObjects();
 	//extern float timeSpawn;
@@ -27,4 +36,5 @@ namespace Main
 	extern void DeleteTwoFirtsBlocks();
 
 	extern void DeleteAllBlocks();
+	extern void GameOverLogic();
 };
