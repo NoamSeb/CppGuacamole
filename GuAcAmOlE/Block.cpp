@@ -5,13 +5,13 @@
 #include "Player.h"
 
 
-void Block::Tick(float DeltaTime)
+void Block::Tick(float speed)
 {
 	//(*shape).move(0.0f, 1.1f);
 
 	sf::Vector2f movement;
 
-	movement.x -= 5.0f;
+	movement.x -= 0.15f;
 
 	Move(movement);
 }

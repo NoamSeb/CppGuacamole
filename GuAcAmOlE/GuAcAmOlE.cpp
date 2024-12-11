@@ -16,6 +16,7 @@ int main()
 	Main::widthEcran = (float)window.getSize().x;
     Main::heightEcran = (float)window.getSize().y + 100;
 
+
 	sf::Clock clock;
 
 	//Get l'instance de HUD
@@ -29,6 +30,8 @@ int main()
 	//Timer
 	float timeElapsed = 0;
 
+
+	float speed = (Main::widthEcran / 3) * timeElapsed;
     //Restart
     //bool gameOver = true;
 

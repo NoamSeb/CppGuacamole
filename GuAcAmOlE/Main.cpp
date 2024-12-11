@@ -10,8 +10,7 @@ std::list<Object*> Main::Objects;
 std::list<ICollider*> Main::CollidingObjects;
 
 float timeSpawn = 0.0f;
-float timeDestroy = 0.0f;
-float attenteDestroy = 16.0f;
+float timeDestroy = -10.0f;
 
 //float widthEcran = sf::VideoMode::getDesktopMode().width;
 //float heightEcran = sf::VideoMode::getDesktopMode().height;
@@ -28,7 +27,7 @@ void Main::spawnObt(float deltaTime)
     timeSpawn += deltaTime;
     timeDestroy += deltaTime;
 
-	if (timeSpawn > 4)
+	if (timeSpawn >= 2)
 	{
         std::vector<float> copiePosObjt = posObt;
 
@@ -45,11 +44,10 @@ void Main::spawnObt(float deltaTime)
         timeSpawn = 0;
 	}
 
-    if (timeDestroy > attenteDestroy)
+    if (timeDestroy >= 6.0f)
     {
         DeleteTwoFirtsBlocks();
         timeDestroy = 0;
-        attenteDestroy = 6.0f;
     }
 }
 
@@ -70,8 +68,7 @@ void Main::DeleteAllBlocks()
 {
     //Init Blocks values
     timeSpawn = 0.0f;
-    timeDestroy = 0.0f;
-    attenteDestroy = 16.0f;
+    timeDestroy = -10.0f;
 
     //Delete all Blocks
     for (auto it = listObt.begin(); it != listObt.end(); ) {
