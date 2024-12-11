@@ -13,12 +13,7 @@ void Block::Tick(float DeltaTime)
 
 	movement.x -= 5.0f;
 
-	(*shape).move(movement);
-	//float result = sdBox(shape->getPosition() - playerPos, sf::Vector2f(50, 50));
-	//sf::Vector2f playerPos;
-	//float playerRadius = 20.0f;
-	
-
+	Move(movement);
 }
 
 void Block::OnTriggerEnter(ICollider* collider)
