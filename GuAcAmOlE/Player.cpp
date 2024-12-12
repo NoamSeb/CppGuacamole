@@ -19,21 +19,32 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed)
 {
 	if (checkPressed)
 	{
-		TryDash(key);
 		if (key == sf::Keyboard::Up)
 		{
+			if (up == false) {
+				TryDash(key);
+			}
 			up = true;
 		}
 		if (key == sf::Keyboard::Down)
 		{
+			if (down == false) {
+				TryDash(key);
+			}
 			down = true;
 		}
 		if (key == sf::Keyboard::Left)
 		{
+			if (left == false) {
+				TryDash(key);
+			}
 			left = true;
 		}
 		if (key == sf::Keyboard::Right)
 		{
+			if (right == false) {
+				TryDash(key);
+			}
 			right = true;
 		}
 	}
