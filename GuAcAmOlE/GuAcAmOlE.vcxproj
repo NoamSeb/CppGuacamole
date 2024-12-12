@@ -133,6 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Boundary.cpp" />
     <ClCompile Include="Ennemy.cpp" />
     <ClCompile Include="Block.cpp" />
     <ClCompile Include="GuAcAmOlE.cpp" />
@@ -144,6 +145,7 @@
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Boundary.h" />
     <ClInclude Include="Ennemy.h" />
     <ClInclude Include="HUD.h" />
     <ClInclude Include="Block.h" />

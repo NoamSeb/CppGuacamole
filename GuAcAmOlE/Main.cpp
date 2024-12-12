@@ -9,6 +9,7 @@
 #include "HUD.h"
 #include "Block.h"
 #include "Player.h"
+#include "Boundary.h"
 
 //Edit
 
@@ -135,6 +136,15 @@ void Main::GameOverLogic()
 void Main::InitGame() {
     std::cout << "Init Game" << std::endl;
     gameState = Main::Playing;
+    Boundary* boundary = new Boundary(Main::widthEcran, 10); // TOP
+    boundary->SetPosition(0, 0);
+    boundary = new Boundary(Main::widthEcran, 10); // BOTTOM
+    boundary->SetPosition(0, Main::heightEcran);
+    boundary = new Boundary(10, Main::heightEcran); // LEFT
+    boundary->SetPosition(0, 0);
+    boundary = new Boundary(10, Main::heightEcran); // RIGHT
+    boundary->SetPosition(Main::widthEcran, 0);
+
     player = new Player(Main::widthEcran *0.75f, Main::heightEcran/2);
     ennemy = SpawnDeathZone();
     DeleteAllBlocks();
