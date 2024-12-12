@@ -18,7 +18,6 @@ Object::Object(ShapeType shapeType, bool willTick) {
 
 		shape = new sf::RectangleShape();
 		dynamic_cast<sf::RectangleShape*>(shape)->setSize(sf::Vector2f(100, 100));
-		shape->setOrigin(50, 50);
 
 		break;
 	default:
@@ -30,19 +29,22 @@ Object::Object(ShapeType shapeType, bool willTick) {
 	Main::Objects.push_back(this);
 }
 
-Object::Object(ShapeType shapeType, bool willTick, float x, float y)
+Object::Object(bool willTick, float x, float y)
 {
 	bTick = willTick;
 	shape = new sf::RectangleShape();
 	dynamic_cast<sf::RectangleShape*>(shape)->setSize(sf::Vector2f(x, y));
-	shape->setOrigin(x / 2, y / 2);
+
+	Main::Objects.push_back(this);
 }
 
-Object::Object(ShapeType shapeType, bool willTick, float radius)
+Object::Object(bool willTick, float radius)
 {
 	bTick = willTick;
 	shape = new sf::CircleShape();
 	dynamic_cast<sf::CircleShape*>(shape)->setRadius(radius);
+
+	Main::Objects.push_back(this);
 }
 
 Object::~Object()
@@ -51,6 +53,7 @@ Object::~Object()
 	if (it != Main::Objects.end()) {
 		Main::Objects.erase(it);
 	}
+
 	delete shape;
 }
 

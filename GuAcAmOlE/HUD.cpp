@@ -19,7 +19,7 @@ void HUD::InitGame() {
 
 //Texts
 void HUD::LoadFont() {
-    arial.loadFromFile("..\\external\\Fonts\\Arial.ttf");
+    // arial.loadFromFile("..\\external\\Fonts\\Arial.ttf");
 }
 
 sf::Text HUD::CreateText(std::string text, sf::Color color) {

@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "MathUtils.h"
+#include "Main.h"
 #include "Player.h"
 
 
@@ -10,9 +11,8 @@ void Block::Tick(float DeltaTime)
 	//(*shape).move(0.0f, 1.1f);
 
 	sf::Vector2f movement;
-    
-	//movement.x -= 0.15f;
-	movement.x -= sf::VideoMode::getDesktopMode().width / 3 * DeltaTime;
+	;
+	movement.x -= Main::getCameraSpeed() * DeltaTime;
 
 	Move(movement);
 }
@@ -22,12 +22,9 @@ void Block::OnTriggerEnter(ICollider* collider)
 	float result = sdBox(collider->collisionShape->getPosition() - collisionShape->getPosition(), sf::Vector2f(50, 50));
 	if (result > 0)
 	{
-		if (Player* player = dynamic_cast<Player*>(collider)) {
-			// If enemy hit player
+		if (Player* player = dynamic_cast<Player*>(collider)) { // If enemy hit player
 			player->Move(sf::Vector2f(-result, 0));
-			std::cout << "Player hit block" << std::endl;
 		}
-		std::cout << "Collision happened" << std::endl;
 	}
 }
 

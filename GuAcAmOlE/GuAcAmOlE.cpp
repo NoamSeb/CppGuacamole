@@ -17,25 +17,13 @@ int main()
 	Main::heightEcran = (float)window.getSize().y;
 
 	sf::Clock clock;
-
-	//Get l'instance de HUD
-	HUD* _HUD = HUD::getInstance();
-	_HUD->LoadFont(); // pr tous les texts
-
-	Player player(300.0f, 250.0f);
-	//std::cout << player.posInit.x << std::endl;
-	Main::EnnemySpawner();
-
-	//Timer
-	float timeElapsed = 0;
-
-	//Restart
-	//bool gameOver = true;
+	
+    Main::InitGame();
 
 	while (window.isOpen())
 	{
 		float deltaTime = clock.getElapsedTime().asSeconds();
-		timeElapsed += deltaTime;
+		Main::timeElapsed += deltaTime;
 		clock.restart();
 
         sf::Event event;
@@ -47,33 +35,33 @@ int main()
             }
                 if (event.type == sf::Event::KeyPressed)
                 {
-                    if (event.key.code == sf::Keyboard::Key::Space)
-                    {
-                        Ennemy* object = new Ennemy(Object::ShapeType::Rectangle, true);
-                    }
-
                     if (event.key.code == sf::Keyboard::Key::R) //Restart
                     {
-                        std::cout << "Init Game" << std::endl;
-                        timeElapsed = 0;
-                        deltaTime = 0;
-                        _HUD->InitGame();
+                        if (Main::gameState == Main::GameOver) {
+                            Main::InitGame();
+                        }
                     }
                 }
                 if (event.type == sf::Event::KeyPressed)
                 {
-                    player.processEvents(event.key.code, true);
+                    Main::player->processEvents(event.key.code, true);
                 }
                 if (event.type == sf::Event::KeyReleased)
                 {
-                    player.processEvents(event.key.code, false);
+                    Main::player->processEvents(event.key.code, false);
                 }
         }
 
         // COLLISION
 
         for (ICollider* colliderA : Main::CollidingObjects) {
+            if (Main::gameState == Main::GameOver) {
+                break;
+            }
             for (ICollider* colliderB : Main::CollidingObjects) {
+                if (Main::gameState == Main::GameOver) {
+                    break;
+                }
                if (colliderA != colliderB) {
                    if (colliderA->collisionShape->getGlobalBounds().intersects(colliderB->collisionShape->getGlobalBounds())) { // Both rectangle intersects
                        colliderA->OnTriggerEnter(colliderB);
@@ -83,9 +71,13 @@ int main()
             }
         }
 
+        if (Main::gameState == Main::GameOver) {
+            Main::CollidingObjects.clear();
+        }
+
         // LOGIC
 
-        Main::spawnObt(deltaTime);
+        Main::spawnBlocks(deltaTime);
 
         for (auto objectToTick : Main::Objects) {
             if (objectToTick->bTick) {
@@ -102,7 +94,7 @@ int main()
             window.draw(*(objectToDraw->shape));
         }
 
-        sf::Text myTimer = _HUD->CreateTimerText(timeElapsed);
+        sf::Text myTimer = Main::_HUD->CreateTimerText(Main::timeElapsed);
         window.draw(myTimer);
 
 		window.display();

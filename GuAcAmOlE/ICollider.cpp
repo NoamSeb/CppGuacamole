@@ -28,14 +28,33 @@ ICollider::ICollider(Object::ShapeType shapeType)
 	Main::CollidingObjects.push_back(this);
 }
 
+ICollider::ICollider(float x, float y)
+{
+	collisionShape = new sf::RectangleShape();
+	dynamic_cast<sf::RectangleShape*>(collisionShape)->setSize(sf::Vector2f(x, y));
+
+	Main::CollidingObjects.push_back(this);
+}
+
+ICollider::ICollider(float radius)
+{
+	collisionShape = new sf::CircleShape();
+	dynamic_cast<sf::CircleShape*>(collisionShape)->setRadius(radius);
+
+	Main::CollidingObjects.push_back(this);
+}
+
 ICollider::~ICollider()
 {
 	std::list<ICollider*>::iterator it = std::find(Main::CollidingObjects.begin(), Main::CollidingObjects.end(), this);
 	if (it != Main::CollidingObjects.end()) {
 		Main::CollidingObjects.erase(it);
+		std::cout << " delete in ~ICollider" << std::endl;
 	}
 	else {
 		std::cout << "[ERROR] Didn't find object to delete in ~ICollider" << std::endl;
 	}
+
+	delete collisionShape;
 }
 

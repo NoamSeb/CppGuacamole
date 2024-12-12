@@ -1,5 +1,7 @@
 #include "Player.h"
 
+#include "Main.h"
+
 //Player::Player(float x, float y) :Object(Circle, true)
 //{
 //	//(*shape).setSize(sf::Vector2f(x, y));
@@ -60,7 +62,7 @@ void Player::Tick(float DeltaTime)
 {
 	Object::Tick(DeltaTime);
 
-	sf::Vector2f speed(200, 200);
+	sf::Vector2f speed(400, 400);
 	sf::Vector2f movement;
 
 	if (up)
@@ -74,9 +76,14 @@ void Player::Tick(float DeltaTime)
 	if (left)
 	{
 		movement.x -= speed.x * DeltaTime;
-	}if (right)
+	}
+	if (right)
 	{
 		movement.x += speed.x * DeltaTime;
+	}
+	//auto move back
+	else {
+		movement.x -= Main::getCameraSpeed() * DeltaTime;
 	}
 
 	Move(movement);
@@ -95,4 +102,5 @@ void Player::OnTriggerEnter(ICollider* collider)
 
 void Player::Init() {
 	shape->setPosition(posInit);
+	collisionShape->setPosition(posInit);
 }

@@ -17,6 +17,5 @@ void Ennemy::OnTriggerEnter(ICollider* collider)
 		// If enemy hit player
 		Main::GameOverLogic();
 	}
-	std::cout << "Collision happened" << std::endl;
 }
 

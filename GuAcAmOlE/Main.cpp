@@ -1,12 +1,24 @@
 #include "Main.h"
+
 #include <vector>
 #include <iostream>
+#include <SFML/Graphics.hpp>
+
 #include "Object.h"
 #include "Ennemy.h"
+#include "HUD.h"
+#include "Block.h"
+#include "Player.h"
+
 //Edit
 
 std::list<Object*> Main::Objects;
 std::list<ICollider*> Main::CollidingObjects;
+
+Ennemy* Main::ennemy;
+Player* Main::player;
+HUD* Main::_HUD;
+float Main::timeElapsed;
 
 float timeSpawn = 0.0f;
 float timeDestroy = 0.0f;
@@ -23,12 +35,17 @@ std::list<Block*> listObt;
 
 bool verif = false;
 
-void Main::spawnObt(float deltaTime)
+float Main::getCameraSpeed() {
+    return sf::VideoMode::getDesktopMode().width / 5.0f;
+}
+
+
+void Main::spawnBlocks(float deltaTime)
 {
     timeSpawn += deltaTime;
     timeDestroy += deltaTime;
 
-	if (timeSpawn > 4)
+	if (timeSpawn > 3)
 	{
         std::vector<float> copiePosObjt = posObt;
 
@@ -36,9 +53,8 @@ void Main::spawnObt(float deltaTime)
         {
             int index = rand() % copiePosObjt.size();
 
-            Block* object = new Block();
+            Block* object = new Block(150, heightEcran / 3);
             object->SetPosition(widthEcran, copiePosObjt[index]);
-            dynamic_cast<sf::RectangleShape*>(object->shape)->setSize(sf::Vector2f(150, heightEcran / 3));
             listObt.push_back(object);
             copiePosObjt.erase(copiePosObjt.begin() + index);
         }
@@ -76,23 +92,19 @@ void Main::DeleteAllBlocks()
 
     //Delete all Blocks
     for (auto it = listObt.begin(); it != listObt.end(); ) {
-        delete* it;
+        //delete* it;
+        (*it)->Destroy();
         it = listObt.erase(it);
     }
     listObt.clear();
 }
 
-void Main::EnnemySpawner()
+Ennemy* Main::SpawnDeathZone()
 {
-    Ennemy* ennemies[3] = { nullptr };
-    for (int i = 0; i < 3; ++i) {
-        Ennemy* ennemy = new Ennemy(Ennemy::ShapeType::Rectangle, true);
-        ennemy->shape->setFillColor(sf::Color::Red);
-        //ennemy->shape->setSize;
-        dynamic_cast<sf::RectangleShape*>(ennemy->shape)->setSize(sf::Vector2f(100, heightEcran));
-        ennemies[i] = ennemy;
-    }
+    Ennemy* ennemy = new Ennemy(100, heightEcran);
+    ennemy->shape->setFillColor(sf::Color::Red);
     std::cout << "Ennemies created" << std::endl;
+    return ennemy;
 }
 
 
@@ -105,13 +117,28 @@ void Main::InitAllObjects() {
         it++;
     }
 }
+
 void Main::GameOverLogic()
 {
-	std::cout << "Game Over" << std::endl;
-	//Delete all blocks
-	DeleteAllBlocks();
-	Main::CollidingObjects.clear();
-	Main::Objects.clear();
-	//Delete all objects
-	Main::gameState = Main::GameState::GameOver;
+    std::cout << "Game Over" << std::endl;
+    //Delete all blocks
+    DeleteAllBlocks();
+
+    //Delete all objects
+    while (!Main::Objects.empty()) {
+        Main::Objects.front()->Destroy();
+    }
+    
+    Main::gameState = Main::GameState::GameOver;
+}
+
+void Main::InitGame() {
+    std::cout << "Init Game" << std::endl;
+    gameState = Main::Playing;
+    player = new Player(Main::widthEcran *0.75f, Main::heightEcran/2);
+    ennemy = SpawnDeathZone();
+    DeleteAllBlocks();
+    _HUD = HUD::getInstance();
+    _HUD->LoadFont(); // pr tous les texts
+    timeElapsed = 0;
 }

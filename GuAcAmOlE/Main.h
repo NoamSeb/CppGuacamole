@@ -1,11 +1,12 @@
 #pragma once
 #include <vector>
 #include <list>
-#include "Object.h"
-#include "Block.h"
 
+class Ennemy;
 class Object;
 class ICollider;
+class HUD;
+class Player;
 
 namespace Main
 {
@@ -18,9 +19,13 @@ namespace Main
 		GameOver
 	};
 
+	extern Ennemy* ennemy;
 	extern GameState gameState;
+	extern HUD* _HUD;
+	extern Player* player;
+	extern float timeElapsed;
 
-	void EnnemySpawner();
+	Ennemy* SpawnDeathZone();
 	void InitAllObjects();
 	//extern float timeSpawn;
 	//
@@ -30,11 +35,14 @@ namespace Main
 	extern float widthEcran;
 	extern float heightEcran;
 
+	//Auto move back
+	extern float getCameraSpeed();
 
 	//extern void spawnObt(float deltaTime, float timeSpawn, std::vector<float> posObt, std::vector<Object*> listObt);
-	extern void spawnObt(float deltaTime);
+	extern void spawnBlocks(float deltaTime);
 	extern void DeleteTwoFirtsBlocks();
 
 	extern void DeleteAllBlocks();
 	extern void GameOverLogic();
+	extern void InitGame();
 };
