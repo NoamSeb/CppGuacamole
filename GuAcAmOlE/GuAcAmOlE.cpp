@@ -89,13 +89,22 @@ int main()
 
         // RENDER
 
-        for (auto objectToDraw : Main::Objects)
+        if (Main::gameState == Main::Playing)
         {
-            window.draw(*(objectToDraw->shape));
-        }
+            for (auto objectToDraw : Main::Objects)
+            {
+                window.draw(*(objectToDraw->shape));
+            }
 
-        sf::Text myTimer = Main::_HUD->CreateTimerText(Main::timeElapsed);
-        window.draw(myTimer);
+            sf::Text myTimer = Main::_HUD->CreateTimerText(Main::timeElapsed);
+            window.draw(myTimer);
+        }
+        else {
+            sf::Text GameOver = Main::_HUD->CreateText("Game Over", 200, sf::Vector2f(Main::widthEcran / 2.0f, Main::heightEcran / 2.0f), sf::Color::Red);
+            sf::Text Restart = Main::_HUD->CreateText("Press R to Restart", 50, sf::Vector2f(Main::widthEcran/2.0f, Main::heightEcran/2.0f - 100), sf::Color::Red);
+            window.draw(GameOver);
+            window.draw(Restart);
+        }
 
 		window.display();
 	}

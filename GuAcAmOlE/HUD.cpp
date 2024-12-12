@@ -4,10 +4,6 @@
 #include "Player.h"
 #include <iostream>
 
-
-//initialisation du singleton
-HUD* HUD::instance = nullptr;
-
 class Player;
 
 //GameLoop
@@ -19,16 +15,20 @@ void HUD::InitGame() {
 
 //Texts
 void HUD::LoadFont() {
-    // arial.loadFromFile("..\\external\\Fonts\\Arial.ttf");
+    arial.loadFromFile("..\\external\\Fonts\\Arial.ttf");
+
+    if (!arial.loadFromFile("..\\external\\Fonts\\Arial.ttf")) {
+        std::cerr << "Erreur : impossible de charger la police Arial.ttf" << std::endl;
+    }
 }
 
-sf::Text HUD::CreateText(std::string text, sf::Color color) {
+sf::Text HUD::CreateText(std::string text, int size, sf::Vector2f pos, sf::Color color) {
     sf::Text myText;
     myText.setFont(arial);
     myText.setString(text);
     myText.setFillColor(color);
-    myText.setPosition(Main::widthEcran/2.0f - 50, 10.0f);
-    myText.setCharacterSize(50);
+    myText.setCharacterSize(size);
+    myText.setPosition(sf::Vector2f(pos.x - myText.getGlobalBounds().width/2, pos.y - myText.getGlobalBounds().height/2)); // position it according to its middle
 
     return myText;
 }
