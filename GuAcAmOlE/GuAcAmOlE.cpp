@@ -89,13 +89,14 @@ int main()
 
         // RENDER
 
+        for (auto objectToDraw : Main::Objects)
+        {
+            window.draw(*(objectToDraw->shape));
+        }
+
+
         if (Main::gameState == Main::Playing)
         {
-            for (auto objectToDraw : Main::Objects)
-            {
-                window.draw(*(objectToDraw->shape));
-            }
-
             sf::Text myTimer = Main::_HUD->CreateTimerText(Main::timeElapsed);
             window.draw(myTimer);
         }
