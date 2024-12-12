@@ -19,6 +19,7 @@ namespace Main
 		GameOver
 	};
 
+	extern Ennemy* ennemy;
 	extern GameState gameState;
 	extern HUD* _HUD;
 	extern Player* player;

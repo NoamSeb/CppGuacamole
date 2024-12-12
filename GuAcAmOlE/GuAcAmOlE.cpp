@@ -17,11 +17,6 @@ int main()
 	Main::heightEcran = (float)window.getSize().y;
 
 	sf::Clock clock;
-
-	
-    Ennemy* deathZone = nullptr;
-
-	//Timer
 	
     Main::InitGame();
 
@@ -40,15 +35,11 @@ int main()
             }
                 if (event.type == sf::Event::KeyPressed)
                 {
-                    if (event.key.code == sf::Keyboard::Key::Space)
-                    {
-                        Ennemy* object = new Ennemy(Object::ShapeType::Rectangle, true);
-                    }
-
                     if (event.key.code == sf::Keyboard::Key::R) //Restart
                     {
-                        std::cout << "Init Game" << std::endl;
-                        Main::InitGame();
+                        if (Main::gameState == Main::GameOver) {
+                            Main::InitGame();
+                        }
                     }
                 }
                 if (event.type == sf::Event::KeyPressed)
@@ -64,7 +55,13 @@ int main()
         // COLLISION
 
         for (ICollider* colliderA : Main::CollidingObjects) {
+            if (Main::gameState == Main::GameOver) {
+                break;
+            }
             for (ICollider* colliderB : Main::CollidingObjects) {
+                if (Main::gameState == Main::GameOver) {
+                    break;
+                }
                if (colliderA != colliderB) {
                    if (colliderA->collisionShape->getGlobalBounds().intersects(colliderB->collisionShape->getGlobalBounds())) { // Both rectangle intersects
                        colliderA->OnTriggerEnter(colliderB);
@@ -72,6 +69,10 @@ int main()
                    }
                }
             }
+        }
+
+        if (Main::gameState == Main::GameOver) {
+            Main::CollidingObjects.clear();
         }
 
         // LOGIC

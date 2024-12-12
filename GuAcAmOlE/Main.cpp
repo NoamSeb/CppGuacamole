@@ -15,6 +15,7 @@
 std::list<Object*> Main::Objects;
 std::list<ICollider*> Main::CollidingObjects;
 
+Ennemy* Main::ennemy;
 Player* Main::player;
 HUD* Main::_HUD;
 float Main::timeElapsed;
@@ -52,9 +53,8 @@ void Main::spawnBlocks(float deltaTime)
         {
             int index = rand() % copiePosObjt.size();
 
-            Block* object = new Block();
+            Block* object = new Block(150, heightEcran / 3);
             object->SetPosition(widthEcran, copiePosObjt[index]);
-            dynamic_cast<sf::RectangleShape*>(object->shape)->setSize(sf::Vector2f(150, heightEcran / 3));
             listObt.push_back(object);
             copiePosObjt.erase(copiePosObjt.begin() + index);
         }
@@ -92,9 +92,9 @@ void Main::DeleteAllBlocks()
 
     //Delete all Blocks
     for (auto it = listObt.begin(); it != listObt.end(); ) {
-        delete* it;
+        //delete* it;
+        (*it)->Destroy();
         it = listObt.erase(it);
-
     }
     listObt.clear();
 }
@@ -123,17 +123,20 @@ void Main::GameOverLogic()
     std::cout << "Game Over" << std::endl;
     //Delete all blocks
     DeleteAllBlocks();
-    Main::CollidingObjects.clear();
-    Main::Objects.clear();
+
     //Delete all objects
+    while (!Main::Objects.empty()) {
+        Main::Objects.front()->Destroy();
+    }
+    
     Main::gameState = Main::GameState::GameOver;
 }
 
 void Main::InitGame() {
     std::cout << "Init Game" << std::endl;
+    gameState = Main::Playing;
     player = new Player(Main::widthEcran *0.75f, Main::heightEcran/2);
-    SpawnDeathZone();
-    //InitAllObjects();
+    ennemy = SpawnDeathZone();
     DeleteAllBlocks();
     _HUD = HUD::getInstance();
     _HUD->LoadFont(); // pr tous les texts

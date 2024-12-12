@@ -49,9 +49,12 @@ ICollider::~ICollider()
 	std::list<ICollider*>::iterator it = std::find(Main::CollidingObjects.begin(), Main::CollidingObjects.end(), this);
 	if (it != Main::CollidingObjects.end()) {
 		Main::CollidingObjects.erase(it);
+		std::cout << " delete in ~ICollider" << std::endl;
 	}
 	else {
 		std::cout << "[ERROR] Didn't find object to delete in ~ICollider" << std::endl;
 	}
+
+	delete collisionShape;
 }
 

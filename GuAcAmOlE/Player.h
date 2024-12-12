@@ -12,7 +12,6 @@ public:
 	Player(float x, float y) : Object(Circle, true), posInit(x, y), ICollider (Circle){
 		shape->setPosition(posInit);
 		collisionShape->setPosition(posInit);
-		
 	};
 
 	virtual void Init() override;
