@@ -19,10 +19,10 @@ void Block::Tick(float DeltaTime)
 
 void Block::OnTriggerEnter(ICollider* collider)
 {
-	float result = sdBox(collider->collisionShape->getPosition() - collisionShape->getPosition(), sf::Vector2f(50, 50));
-	if (result > 0)
-	{
-		if (Player* player = dynamic_cast<Player*>(collider)) { // If enemy hit player
+	if (Player* player = dynamic_cast<Player*>(collider)) {
+		float result = sdBox(collider->collisionShape->getPosition() - collisionShape->getPosition(), sf::Vector2f(50, 50));
+		if (result > 0)
+		{
 			player->Move(sf::Vector2f(-result, 0));
 		}
 	}
