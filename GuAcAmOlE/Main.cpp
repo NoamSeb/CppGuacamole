@@ -33,7 +33,7 @@ float Main::heightEcran;
 std::vector<float> Main::posObt;
 std::list<Block*> listObt;
 
-bool verif = false;
+bool canSpawnBlock = true;
 
 float Main::getCameraSpeed() {
     return sf::VideoMode::getDesktopMode().width / 5.0f;
@@ -42,31 +42,34 @@ float Main::getCameraSpeed() {
 
 void Main::spawnBlocks(float deltaTime)
 {
-    timeSpawn += deltaTime;
-    timeDestroy += deltaTime;
+    if (canSpawnBlock)
+    {
+        timeSpawn += deltaTime;
+        timeDestroy += deltaTime;
 
-	if (timeSpawn > 3)
-	{
-        std::vector<float> copiePosObjt = posObt;
-
-        for (int i = 0; i < 2; i++)
+        if (timeSpawn > 3)
         {
-            int index = rand() % copiePosObjt.size();
+            std::vector<float> copiePosObjt = posObt;
 
-            Block* object = new Block(150, heightEcran / 3);
-            object->SetPosition(widthEcran, copiePosObjt[index]);
-            listObt.push_back(object);
-            copiePosObjt.erase(copiePosObjt.begin() + index);
+            for (int i = 0; i < 2; i++)
+            {
+                int index = rand() % copiePosObjt.size();
+
+                Block* object = new Block(150, heightEcran / 3);
+                object->SetPosition(widthEcran, copiePosObjt[index]);
+                listObt.push_back(object);
+                copiePosObjt.erase(copiePosObjt.begin() + index);
+            }
+
+            timeSpawn = 0;
         }
 
-        timeSpawn = 0;
-	}
-
-    if (timeDestroy > attenteDestroy)
-    {
-        Main::DeleteTwoFirtsBlocks();
-        timeDestroy = 0;
-        attenteDestroy = 6.0f;
+        if (timeDestroy > attenteDestroy)
+        {
+            Main::DeleteTwoFirtsBlocks();
+            timeDestroy = 0;
+            attenteDestroy = 6.0f;
+        }
     }
 }
 
@@ -123,6 +126,7 @@ void Main::GameOverLogic()
     std::cout << "Game Over" << std::endl;
     //Delete all blocks
     DeleteAllBlocks();
+    canSpawnBlock = false;
 
     //Delete all objects
     while (!Main::Objects.empty()) {
@@ -141,4 +145,5 @@ void Main::InitGame() {
     _HUD = HUD::getInstance();
     _HUD->LoadFont(); // pr tous les texts
     timeElapsed = 0;
+    canSpawnBlock = true;
 }
