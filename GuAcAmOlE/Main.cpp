@@ -2,6 +2,8 @@
 
 #include <vector>
 #include <iostream>
+#include <SFML/Graphics.hpp>
+
 #include "Object.h"
 #include "Ennemy.h"
 #include "HUD.h"
@@ -32,12 +34,17 @@ std::list<Block*> listObt;
 
 bool verif = false;
 
-void Main::spawnObt(float deltaTime)
+float Main::getCameraSpeed() {
+    return sf::VideoMode::getDesktopMode().width / 5.0f;
+}
+
+
+void Main::spawnBlocks(float deltaTime)
 {
     timeSpawn += deltaTime;
     timeDestroy += deltaTime;
 
-	if (timeSpawn > 4)
+	if (timeSpawn > 3)
 	{
         std::vector<float> copiePosObjt = posObt;
 
@@ -124,8 +131,9 @@ void Main::GameOverLogic()
 
 void Main::InitGame() {
     std::cout << "Init Game" << std::endl;
-    player = new Player(300.0f, 250.0f);
+    player = new Player(Main::widthEcran *0.75f, Main::heightEcran/2);
     SpawnDeathZone();
+    //InitAllObjects();
     DeleteAllBlocks();
     _HUD = HUD::getInstance();
     _HUD->LoadFont(); // pr tous les texts

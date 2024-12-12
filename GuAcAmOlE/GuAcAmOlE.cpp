@@ -19,7 +19,6 @@ int main()
 	sf::Clock clock;
 
 	
-	//std::cout << player.posInit.x << std::endl;
     Ennemy* deathZone = nullptr;
 
 	//Timer
@@ -77,7 +76,7 @@ int main()
 
         // LOGIC
 
-        Main::spawnObt(deltaTime);
+        Main::spawnBlocks(deltaTime);
 
         for (auto objectToTick : Main::Objects) {
             if (objectToTick->bTick) {

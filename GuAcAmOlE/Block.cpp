@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "MathUtils.h"
+#include "Main.h"
 #include "Player.h"
 
 
@@ -11,7 +12,7 @@ void Block::Tick(float DeltaTime)
 
 	sf::Vector2f movement;
 	;
-	movement.x -= sf::VideoMode::getDesktopMode().width / 3 * DeltaTime;
+	movement.x -= Main::getCameraSpeed() * DeltaTime;
 
 	Move(movement);
 }

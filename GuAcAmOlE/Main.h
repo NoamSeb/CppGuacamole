@@ -34,9 +34,11 @@ namespace Main
 	extern float widthEcran;
 	extern float heightEcran;
 
+	//Auto move back
+	extern float getCameraSpeed();
 
 	//extern void spawnObt(float deltaTime, float timeSpawn, std::vector<float> posObt, std::vector<Object*> listObt);
-	extern void spawnObt(float deltaTime);
+	extern void spawnBlocks(float deltaTime);
 	extern void DeleteTwoFirtsBlocks();
 
 	extern void DeleteAllBlocks();
