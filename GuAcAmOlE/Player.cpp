@@ -13,8 +13,6 @@
 //}
 
 
-
-
 void Player::processEvents(sf::Keyboard::Key key, bool checkPressed)
 {
 	if (checkPressed)
@@ -70,44 +68,16 @@ void Player::processEvents(sf::Keyboard::Key key, bool checkPressed)
 	}
 }
 
-void Player::TryDash(sf::Keyboard::Key key) {
-	if (lastKeyInput == key) {
-		if (comboClock.getElapsedTime().asSeconds() < comboDeltaTime) {
-			if (timeSinceLastDash >= dashCooldown) {
-				switch (key) {
-					case sf::Keyboard::Up: {
-						Dash(sf::Vector2f(0.f, -1.f));
-						break;
-					}
-					case sf::Keyboard::Down: {
-						Dash(sf::Vector2f(0.f, 1.f));
-						break;
-					}
-					case sf::Keyboard::Right: {
-						Dash(sf::Vector2f(1.f, 0.f));
-						break;
-					}
-					case sf::Keyboard::Left: {
-						Dash(sf::Vector2f(-1.f, 0.f));
-						break;
-					}
-				}
-				timeSinceLastDash = 0.f;
-			}
-		}
-	}
-	comboClock.restart();
-	lastKeyInput = key;
-}
+
 
 void Player::Tick(float DeltaTime)
 {
 	Object::Tick(DeltaTime);
 
-	timeSinceLastDash += DeltaTime;
-
 	sf::Vector2f speed(400, 400);
 	sf::Vector2f movement;
+
+	dashTimer -= DeltaTime;
 
 	if (up)
 	{
@@ -130,6 +100,13 @@ void Player::Tick(float DeltaTime)
 		movement.x -= Main::getCameraSpeed() * DeltaTime;
 	}
 
+	if (dashTimer > 0) {
+		DashOnCooldown();
+	}
+	else {
+		shape->setFillColor(baseColor);
+	}
+
 	movement += dashMovement;
 	DecreaseDash(DeltaTime);
 
@@ -137,8 +114,37 @@ void Player::Tick(float DeltaTime)
 
 }
 
+void Player::TryDash(sf::Keyboard::Key key) {
+	if (lastKeyInput == key) {
+		if (comboClock.getElapsedTime().asSeconds() < comboDeltaTime) {
+			if (dashTimer <= 0) {
+				switch (key) {
+				case sf::Keyboard::Up: {
+					Dash(sf::Vector2f(0.f, -1.f));
+					break;
+				}
+				case sf::Keyboard::Down: {
+					Dash(sf::Vector2f(0.f, 1.f));
+					break;
+				}
+				case sf::Keyboard::Right: {
+					Dash(sf::Vector2f(1.f, 0.f));
+					break;
+				}
+				case sf::Keyboard::Left: {
+					Dash(sf::Vector2f(-1.f, 0.f));
+					break;
+				}
+				}
+				dashTimer = dashCooldown;
+			}
+		}
+	}
+	comboClock.restart();
+	lastKeyInput = key;
+}
+
 void Player::Dash(sf::Vector2f direction) {
-	std::cout << "Dash in direction: " << direction.x << ", " << direction.y << std::endl;
 	dashMovement = sf::Vector2f(direction.x * dashStrenght, direction.y * dashStrenght);
 }
 
@@ -157,6 +163,15 @@ void Player::DecreaseDash(float DeltaTime) {
 		dashMovement.y = std::min(dashMovement.y + DeltaTime * dashDecreasedStrenght, 0.f);
 	}
 
+}
+
+void Player::DashOnCooldown() {
+	if ((int)Main::timeElapsed % 2) {
+		shape->setFillColor(sf::Color(255, 0, 0, 120));
+	}
+	else {
+		shape->setFillColor(baseColor);
+	}
 }
 
 void Player::drawTo(sf::RenderWindow& window)

@@ -23,7 +23,9 @@ float Main::timeElapsed;
 
 float timeSpawn = 0.0f;
 float timeDestroy = 0.0f;
-float attenteDestroy = 16.0f;
+const float attenteSpawn = 3.0f;
+const float attenteDestroy = 3.0f;
+const float timeDestroyOffset = -10.0f;
 Main::GameState Main::gameState = Main::GameState::GameOver;
 
 //float widthEcran = sf::VideoMode::getDesktopMode().width;
@@ -40,13 +42,12 @@ float Main::getCameraSpeed() {
     return sf::VideoMode::getDesktopMode().width / 5.0f;
 }
 
-
 void Main::spawnBlocks(float deltaTime)
 {
     timeSpawn += deltaTime;
     timeDestroy += deltaTime;
 
-	if (timeSpawn > 3)
+	if (timeSpawn > attenteSpawn)
 	{
         std::vector<float> copiePosObjt = posObt;
 
@@ -54,7 +55,8 @@ void Main::spawnBlocks(float deltaTime)
         {
             int index = rand() % copiePosObjt.size();
 
-            Block* object = new Block(500, heightEcran / 3);
+            Block* object = new Block(widthEcran / 8, heightEcran / 3);
+            object->collideDirection = Direction::LEFT;
             object->SetPosition(widthEcran, copiePosObjt[index]);
             listObt.push_back(object);
             copiePosObjt.erase(copiePosObjt.begin() + index);
@@ -67,7 +69,6 @@ void Main::spawnBlocks(float deltaTime)
     {
         Main::DeleteTwoFirtsBlocks();
         timeDestroy = 0;
-        attenteDestroy = 6.0f;
     }
 }
 
@@ -88,8 +89,7 @@ void Main::DeleteAllBlocks()
 {
     //Init Blocks values
     timeSpawn = 0.0f;
-    timeDestroy = 0.0f;
-    attenteDestroy = 16.0f;
+    timeDestroy = timeDestroyOffset;
 
     //Delete all Blocks
     for (auto it = listObt.begin(); it != listObt.end(); ) {
@@ -138,15 +138,16 @@ void Main::InitGame() {
     gameState = Main::Playing;
     Boundary* boundary = new Boundary(Main::widthEcran, 10); // TOP
     boundary->SetPosition(0, 0);
+    boundary->collideDirection = Direction::DOWN;
     boundary = new Boundary(Main::widthEcran, 10); // BOTTOM
-    boundary->SetPosition(0, Main::heightEcran);
-    boundary = new Boundary(10, Main::heightEcran); // LEFT
-    boundary->SetPosition(0, 0);
+    boundary->SetPosition(0, Main::heightEcran - 10);
+    boundary->collideDirection = Direction::UP;
     boundary = new Boundary(10, Main::heightEcran); // RIGHT
-    boundary->SetPosition(Main::widthEcran, 0);
+    boundary->SetPosition(Main::widthEcran - 10, 0);
+    boundary->collideDirection = Direction::LEFT;
 
     player = new Player(Main::widthEcran *0.75f, Main::heightEcran/2);
-    player->shape->setFillColor(sf::Color(255, 200, 255));
+    player->shape->setFillColor(player->baseColor);
     ennemy = SpawnDeathZone();
     DeleteAllBlocks();
     _HUD = HUD::getInstance();

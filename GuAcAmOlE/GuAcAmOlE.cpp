@@ -63,6 +63,7 @@ int main()
                     break;
                 }
                if (colliderA != colliderB) {
+
                    if (colliderA->collisionShape->getGlobalBounds().intersects(colliderB->collisionShape->getGlobalBounds())) { // Both rectangle intersects
                        colliderA->OnTriggerEnter(colliderB);
                        // dynamic_cast<ICollider*>(b)->OnTriggerEnter(a); can be used if we skipped next iteration on same object

@@ -1,6 +1,7 @@
 #pragma once
-#include"Object.h"
+#include "Object.h"
 #include "ICollider.h"
+#include "iostream"
 
 class Block : public Object, public ICollider
 {

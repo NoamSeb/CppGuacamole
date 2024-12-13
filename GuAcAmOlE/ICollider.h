@@ -3,10 +3,19 @@
 #include <SFML/Graphics.hpp>
 #include "Object.h"
 
+enum Direction {
+	UP,
+	DOWN,
+	LEFT,
+	RIGHT
+};
+
+
 class ICollider
 {
 public:
 	sf::Shape* collisionShape;
+	Direction collideDirection;
 
 	ICollider(Object::ShapeType shapeType);
 	ICollider(float radius);
@@ -15,4 +24,5 @@ public:
 
 	virtual void OnTriggerEnter(ICollider* collider) = 0;
 };
+
 

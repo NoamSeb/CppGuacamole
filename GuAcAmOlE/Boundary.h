@@ -4,6 +4,7 @@
 
 class Boundary : public Object, public ICollider
 {
+
 public:
 	Boundary(float width, float height) : Object(true, width, height), ICollider(width, height) {};
 
@@ -11,4 +12,3 @@ public:
 	void Destroy() override;
 	void OnTriggerEnter(ICollider* collider) override;
 };
-

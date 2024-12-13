@@ -19,12 +19,24 @@ float Boundary::sdBox(sf::Vector2f p, sf::Vector2f b)
 void Boundary::OnTriggerEnter(ICollider* collider)
 {
 	if (Player* player = dynamic_cast<Player*>(collider)) {
-		//float result = sdBox(collider->collisionShape->getPosition() - collisionShape->getPosition(), sf::Vector2f(50, 50));
-		//if (result > 0)
-		//{
-		//	player->Move(sf::Vector2f(-result, 0));
-		//}
-		std::cout << "Player touched boundary" << std::endl;
+		float result = sdBox(collisionShape->getPosition(), collider->collisionShape->getPosition());
+		if (result < 0)
+		{
+			switch (collideDirection) {
+			case Direction::UP:
+				player->Move(sf::Vector2f(0, result));
+				break;
+			case Direction::DOWN:
+				player->Move(sf::Vector2f(0, -result));
+				break;
+			case Direction::LEFT:
+				player->Move(sf::Vector2f(result, 0));
+				break;
+			case Direction::RIGHT:
+				player->Move(sf::Vector2f(-result, 0));
+				break;
+			}
+		}
 	}
 }
 
