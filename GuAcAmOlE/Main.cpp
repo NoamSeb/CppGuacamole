@@ -146,6 +146,7 @@ void Main::InitGame() {
     boundary->SetPosition(Main::widthEcran, 0);
 
     player = new Player(Main::widthEcran *0.75f, Main::heightEcran/2);
+    player->shape->setFillColor(sf::Color(255, 200, 255));
     ennemy = SpawnDeathZone();
     DeleteAllBlocks();
     _HUD = HUD::getInstance();

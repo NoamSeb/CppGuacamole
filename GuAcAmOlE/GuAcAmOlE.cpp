@@ -91,12 +91,15 @@ int main()
 
         for (auto objectToDraw : Main::Objects)
         {
-            window.draw(*(objectToDraw->shape));
+            if (!(dynamic_cast<Player*>(objectToDraw))) { // Draw everything but player
+                window.draw(*(objectToDraw->shape));
+            }
         }
-
 
         if (Main::gameState == Main::Playing)
         {
+            window.draw(*(Main::player->shape));// Draw player at the end
+
             sf::Text myTimer = Main::_HUD->CreateTimerText(Main::timeElapsed);
             window.draw(myTimer);
         }
