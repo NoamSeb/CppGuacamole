@@ -23,7 +23,6 @@ int main()
 	while (window.isOpen())
 	{
 		float deltaTime = clock.getElapsedTime().asSeconds();
-		Main::timeElapsed += deltaTime;
 		clock.restart();
 
         sf::Event event;
@@ -78,6 +77,10 @@ int main()
 
         // LOGIC
 
+        if (Main::gameState == Main::Playing) {
+            Main::timeElapsed += deltaTime;
+        }
+
         Main::spawnBlocks(deltaTime);
 
         for (auto objectToTick : Main::Objects) {
@@ -100,9 +103,6 @@ int main()
         if (Main::gameState == Main::Playing)
         {
             window.draw(*(Main::player->shape));// Draw player at the end
-
-            sf::Text myTimer = Main::_HUD->CreateTimerText(Main::timeElapsed);
-            window.draw(myTimer);
         }
         else {
             sf::Text GameOver = Main::_HUD->CreateText("Game Over", 200, sf::Vector2f(Main::widthEcran / 2.0f, Main::heightEcran / 2.0f), sf::Color::Red);
@@ -110,6 +110,9 @@ int main()
             window.draw(GameOver);
             window.draw(Restart);
         }
+
+        sf::Text myTimer = Main::_HUD->CreateTimerText(Main::timeElapsed);
+        window.draw(myTimer);
 
 		window.display();
 	}
