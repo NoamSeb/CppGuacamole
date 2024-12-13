@@ -97,7 +97,7 @@ void Player::Tick(float DeltaTime)
 	}
 	//auto move back
 	else {
-		movement.x -= Main::getCameraSpeed() * DeltaTime;
+		// movement.x -= Main::getCameraSpeed() * DeltaTime;
 	}
 
 	if (dashTimer > 0) {

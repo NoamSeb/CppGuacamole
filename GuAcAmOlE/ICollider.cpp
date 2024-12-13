@@ -32,6 +32,7 @@ ICollider::ICollider(float x, float y)
 {
 	collisionShape = new sf::RectangleShape();
 	dynamic_cast<sf::RectangleShape*>(collisionShape)->setSize(sf::Vector2f(x, y));
+	collisionShape->setOrigin(sf::Vector2f(x / 2, y / 2));
 
 	Main::CollidingObjects.push_back(this);
 }
@@ -40,6 +41,7 @@ ICollider::ICollider(float radius)
 {
 	collisionShape = new sf::CircleShape();
 	dynamic_cast<sf::CircleShape*>(collisionShape)->setRadius(radius);
+	collisionShape->setOrigin(sf::Vector2f(radius, radius));
 
 	Main::CollidingObjects.push_back(this);
 }

@@ -56,7 +56,7 @@ void Main::spawnBlocks(float deltaTime)
 			for (int i = 0; i < 2; i++) {
 				int index = rand() % copiePosObjt.size();
 
-				Block* object = new Block(widthEcran / 8, heightEcran / 3);
+				Block* object = new Block(widthEcran / 5, heightEcran / 3);
 				object->collideDirection = Direction::LEFT;
 				object->SetPosition(widthEcran, copiePosObjt[index]);
 				listObt.push_back(object);
@@ -104,7 +104,8 @@ void Main::DeleteAllBlocks()
 
 Ennemy* Main::SpawnDeathZone()
 {
-	Ennemy* ennemy = new Ennemy(100, heightEcran);
+	Ennemy* ennemy = new Ennemy(200, heightEcran);
+	ennemy->SetPosition(100, heightEcran / 2);
 	ennemy->shape->setFillColor(sf::Color::Red);
 	std::cout << "Ennemies created" << std::endl;
 	return ennemy;
@@ -140,17 +141,24 @@ void Main::InitGame() {
 	std::cout << "Init Game" << std::endl;
 	gameState = Main::Playing;
 	Boundary* boundary = new Boundary(Main::widthEcran, 10); // TOP
-	boundary->SetPosition(0, 0);
+	boundary->SetPosition(Main::widthEcran / 2, 5);
 	boundary->collideDirection = Direction::DOWN;
+
 	boundary = new Boundary(Main::widthEcran, 10); // BOTTOM
-	boundary->SetPosition(0, Main::heightEcran - 10);
+	boundary->SetPosition(Main::widthEcran / 2, Main::heightEcran - 5);
 	boundary->collideDirection = Direction::UP;
+
 	boundary = new Boundary(10, Main::heightEcran); // RIGHT
-	boundary->SetPosition(Main::widthEcran - 10, 0);
+	boundary->SetPosition(Main::widthEcran - 5, Main::heightEcran / 2);
 	boundary->collideDirection = Direction::LEFT;
 
 	player = new Player(Main::widthEcran * 0.75f, Main::heightEcran / 2);
 	player->shape->setFillColor(player->baseColor);
+	sf::CircleShape* shape = dynamic_cast<sf::CircleShape*>(player->shape);
+	player->shape->setOrigin(shape->getRadius(), shape->getRadius());
+	sf::CircleShape* shapecoll = dynamic_cast<sf::CircleShape*>(player->collisionShape);
+	player->shape->setOrigin(shapecoll->getRadius(), shapecoll->getRadius());
+
 	ennemy = SpawnDeathZone();
 	DeleteAllBlocks();
 	_HUD = HUD::getInstance();

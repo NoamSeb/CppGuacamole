@@ -23,9 +23,12 @@ void Block::Tick(float DeltaTime)
 void Block::OnTriggerEnter(ICollider* collider)
 {
 	if (Player* player = dynamic_cast<Player*>(collider)) {
-		float result = sdBox(collisionShape->getPosition(), collider->collisionShape->getPosition()); // La sdbox se faisait sur un shape arbitraire 50, 50, d'où le collision bizarre
+		sf::Vector2f vec = dynamic_cast<sf::RectangleShape*>(collisionShape)->getSize() / 2.f;
+		float radius = dynamic_cast<sf::CircleShape*>(collider->collisionShape)->getRadius();
+		float result = sdBox(collisionShape->getPosition() - collider->collisionShape->getPosition(), sf::Vector2f(vec.x + radius, vec.y + radius));
 		if (result < 0)
 		{
+			std::cout << result << std::endl;
 			switch (collideDirection) {
 			case Direction::UP:
 				player->Move(sf::Vector2f(0, result));

@@ -7,14 +7,17 @@
 #include "HUD.h"
 #include "Block.h"
 #include "ICollider.h"
+#include "Boundary.h"
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode::getDesktopMode(), "AvocadoRush", sf::Style::Fullscreen);
-	//sf::RenderWindow window(sf::VideoMode(800, 600), "AvocadoRush");
-    Main::posObt = { 0.0f, (float)window.getSize().y / 3 , (float)window.getSize().y - (float)window.getSize().y / 3 };
+	// sf::RenderWindow window(sf::VideoMode(3840, 2160), "AvocadoRush");
+    
 	Main::widthEcran = (float)window.getSize().x;
 	Main::heightEcran = (float)window.getSize().y;
+    Main::posObt = { 0.0f + Main::heightEcran / 6, (float)window.getSize().y / 3 + Main::heightEcran / 6, (float)window.getSize().y - (float)window.getSize().y / 3 + Main::heightEcran / 6};
+    std::cout << Main::posObt[0] << ", " << Main::posObt[1] << ", " << Main::posObt[2] << std::endl;
 
 	sf::Clock clock;
 	

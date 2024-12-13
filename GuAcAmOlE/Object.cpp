@@ -34,6 +34,7 @@ Object::Object(bool willTick, float x, float y)
 	bTick = willTick;
 	shape = new sf::RectangleShape();
 	dynamic_cast<sf::RectangleShape*>(shape)->setSize(sf::Vector2f(x, y));
+	shape->setOrigin(sf::Vector2f(x / 2, y / 2));
 
 	Main::Objects.push_back(this);
 }
@@ -43,6 +44,7 @@ Object::Object(bool willTick, float radius)
 	bTick = willTick;
 	shape = new sf::CircleShape();
 	dynamic_cast<sf::CircleShape*>(shape)->setRadius(radius);
+	shape->setOrigin(sf::Vector2f(radius, radius));
 
 	Main::Objects.push_back(this);
 }
