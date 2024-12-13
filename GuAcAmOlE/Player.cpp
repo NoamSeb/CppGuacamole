@@ -162,12 +162,11 @@ void Player::DecreaseDash(float DeltaTime) {
 	else {
 		dashMovement.y = std::min(dashMovement.y + DeltaTime * dashDecreasedStrenght, 0.f);
 	}
-
 }
 
 void Player::DashOnCooldown() {
 	if ((int)Main::timeElapsed % 2) {
-		shape->setFillColor(sf::Color(255, 0, 0, 120));
+		shape->setFillColor(sf::Color(baseColor.r, baseColor.g, baseColor.b, 120));
 	}
 	else {
 		shape->setFillColor(baseColor);

@@ -4,12 +4,19 @@
 #include "MathUtils.h"
 #include "Main.h"
 #include "Player.h"
+#include "math.h"
 
 void Block::Tick(float DeltaTime)
 {
 	sf::Vector2f movement;
-	movement.x -= Main::getCameraSpeed() * DeltaTime * std::log10(Main::timeElapsed * 5);
-
+	movement.x -= Main::getCameraSpeed() * DeltaTime * exp(sqrt(Main::timeElapsed / 60));
+	// Difficulté au début: 1x
+	// à 10s: 1.09x
+	// à 30s: 1.18x
+	// à 60s: 1.65x
+	// à 120s : 2.72x
+	// à 300s : 12.18x
+	
 	Move(movement);
 }
 
