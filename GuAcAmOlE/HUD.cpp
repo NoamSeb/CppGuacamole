@@ -15,10 +15,10 @@ void HUD::InitGame() {
 
 //Texts
 void HUD::LoadFont() {
-    arial.loadFromFile("..\\external\\Fonts\\Arial.ttf");
-
-    if (!arial.loadFromFile("..\\external\\Fonts\\Arial.ttf")) {
-        std::cerr << "Erreur : impossible de charger la police Arial.ttf" << std::endl;
+    if (!arial.loadFromFile("..\\external\\Fonts\\Arial.ttf")) { // Load from solution
+        if (!arial.loadFromFile("Fonts\\Arial.ttf")){ // Load from build
+            std::cerr << "Erreur : impossible de charger la police Arial.ttf" << std::endl;
+        }
     }
 }
 
